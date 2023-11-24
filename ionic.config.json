@@ -1,0 +1,7 @@
+{
+  "name": "AppPouletFarm",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
