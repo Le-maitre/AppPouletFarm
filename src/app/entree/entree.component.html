@@ -16,8 +16,8 @@
 
 <ion-content>
 <div class="listuser animate__animated animate__fadeInUp ">
-  <ion-card *ngFor="let entry of userEntries, let i = index">
-    <ion-card-content>
+  <ion-card>
+    <ion-card-content  *ngFor="let entry of userEntries, let i = index">
       <ion-list >
         <!-- <ion-item *ngFor="let element of data[0], let i = index" > -->
           <ion-item>
