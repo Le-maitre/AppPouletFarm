@@ -1,0 +1,37 @@
+<div id="container" style="display: grid; " class="head animate__animated animate__fadeInDown ">
+  <ion-icon name="arrow-undo" style="display: block; font-size: 25px; padding: 15px  15px 0  15px; color: #fff;" [routerLink]="['../mort']"></ion-icon>
+  <div class="img" style="box-sizing: border-box;">
+    <img src="../../assets/mort.png" alt="" width="100px" height="80px" >
+    <p style="margin-right: 20px; color: #fff;"> <strong>Signaler Perte</strong></p>
+  </div>
+</div>
+
+<ion-content>
+
+  <form >
+    <div class="main">
+    <div  class="input-item">
+      <ion-label class="label">Nom</ion-label>
+      <input class="input" type="text" placeholder="Perte 30/11/2023"/>
+    </div >
+
+    <div  class="input-item">
+      <ion-label class="label">Nombre</ion-label>
+      <input class="input" type="number" placeholder="3"/>
+    </div >
+    <div  class="input-item">
+      <ion-label class="label">Cause</ion-label>
+      <input class="input" type="text" placeholder="Gumboro"/>
+    </div >
+
+    <div  class="input-item">
+      <ion-label class="label">Date</ion-label>
+      <input class="input" type="Date" placeholder="12/12/2023"/>
+    </div >
+    <div class="frame">
+      <button class="custom-btn btn-5"><span>Soumettre</span></button>
+
+      </div>
+    </div>
+   </form>
+</ion-content>

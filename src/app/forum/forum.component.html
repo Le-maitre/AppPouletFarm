@@ -1,0 +1,49 @@
+<div id="container" style="display: grid; " class="head animate__animated animate__fadeInDown ">
+  <ion-icon name="arrow-undo" style="display: block; font-size: 25px; padding: 15px  15px 0  15px; color: #fff;" [routerLink]="['../']"></ion-icon>
+  <div class="img" style="box-sizing: border-box;">
+    <img src="../../assets/Forum.png" alt="" width="150px" height="100px" >
+    <p style="margin-right: 0px; color: #fff;"> <strong>Forum </strong></p>
+  </div>
+</div>
+
+<ion-content class="ion-padding">
+<!-- <ion-label style=" margin-left: 20px ; margin-top: 10px"><strong></strong></ion-label> -->
+<ion-card routerLink="/ajoutforum" class="new-post-card">
+  <ion-card-content class="ion-text-center" style="cursor: pointer;">
+    <ion-row class="ion-align-items-center ion-justify-content-between">
+      <ion-icon name="chatbubbles" size="medium" color="primary"></ion-icon>
+      <ion-title class="new-post-title">Quoi de neuf ?</ion-title>
+      <ion-icon name="images" size="medium" color="primary"></ion-icon>
+    </ion-row>
+  </ion-card-content>
+</ion-card>
+
+
+
+
+
+  <!-- Forum Posts -->
+  <ion-card *ngFor="let post of forumPosts">
+    <ion-card-header>
+      <ion-row class="ion-align-items-center">
+        <ion-icon name="person" size="large"></ion-icon>
+        <ion-title>{{ post.author }}</ion-title>
+      </ion-row>
+    </ion-card-header>
+    <ion-card-content>
+      <p>{{ post.content }}</p>
+      <ion-img [src]="post.image"></ion-img>
+    </ion-card-content>
+    <ion-row class="ion-justify-content-between">
+      <ion-button color="primary" fill="clear">Like {{ post.likes }}</ion-button>
+      <ion-button color="secondary" fill="clear">Commenter</ion-button>
+      <ion-button color="secondary" fill="clear" expand="full" (click)="showOptionsMenu(post)">
+        <ion-icon name="ellipsis-horizontal"></ion-icon>
+      </ion-button>
+      <ion-item-options side="end" *ngIf="activeMenu === post.id">
+        <ion-item-option (click)="deletePost(post)">Supprimer la publication</ion-item-option>
+      </ion-item-options>
+    </ion-row>
+  </ion-card>
+
+</ion-content>

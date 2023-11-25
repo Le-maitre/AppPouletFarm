@@ -1,0 +1,60 @@
+
+  .contenue img{
+    width: 10em;
+    height: auto;
+    border-radius: 80%;
+    margin-top: -4em;
+    border: 4px solid #fff;
+  }
+  .membre{
+    //à enlever une fois terminer
+    // border: 1px solid black;
+    border-radius: 7px;
+    width: 60%;
+    padding: 0.1em;
+    margin-left: 5em;
+    background-color: #d9d9d95d;
+  }
+  .comment{
+  display: flex;
+  align-items: center;
+  margin-left: 2em;
+  margin-top: 15px;
+  }
+  .comment img{
+  width: 2.5em;
+  margin-top: 0.4em;
+  }
+  .header {
+    background-color: #005B2F;
+    width: 100%;
+    height: 35%;
+  }
+
+  .contenue {
+    background-color: #ffffff;
+    text-align: center;
+    height: 100%;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+    margin-top: -75px;
+    padding-bottom: 60px; /* Ajout d'un padding en bas pour éviter que le bouton ne se superpose */
+  }
+
+  /* ... (styles pour d'autres éléments) ... */
+
+  /* Bouton Déconnexion */
+  .deconnexion {
+    position: fixed; /* Changer la position à "fixed" pour rester fixe lors du défilement */
+    bottom: 20px; /* Ajuster la distance du bas selon vos préférences */
+    left: 50%; /* Centrer horizontalement */
+    transform: translateX(-50%); /* Ajuster pour centrer horizontalement */
+    background-color: #CD7210;
+    padding: 0.4em 2em; /* Ajuster la largeur du bouton selon vos besoins */
+    border-radius: 10px;
+    color: #FFF;
+    border: none;
+    z-index: 999; 
+  }
+
+  

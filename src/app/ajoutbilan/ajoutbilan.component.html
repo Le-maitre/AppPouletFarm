@@ -1,0 +1,32 @@
+
+<div id="container" style="display: grid; " class="head animate__animated animate__fadeInDown ">
+  <ion-icon name="arrow-undo" style="display: block; font-size: 25px; padding: 15px  15px 0  15px; color: #fff;" [routerLink]="['../bilan']"></ion-icon>
+  <div class="img" style="box-sizing: border-box;">
+    <img src="../../assets/bilan.png" alt="" width="100px" height="80px" >
+    <p style="margin-right: 0px; color: #fff;"> <strong>Bilan </strong></p>
+  </div>
+</div>
+
+<ion-content>
+   <h2 style="text-align: center; margin-top: 20px;">Ajouter un bilan</h2>
+
+  <form (ngSubmit)="ajouterBilan()">
+    <div class="main">
+      <div class="input-item">
+        <ion-label class="label">Nom</ion-label>
+        <input class="input" type="text" placeholder="" name="nom" [(ngModel)]="formData.nom" required/>
+      </div>
+      <!-- Ajoutez d'autres champs pour votre formulaire ici -->
+
+      <div class="frame">
+        <button class="custom-btn btn-5" type="submit" style="margin-top: 130px;">
+          <span>Ajouter</span>
+        </button>
+      </div>
+    </div>
+  </form>
+   <!-- Affichage du message de succès -->
+   <div *ngIf="successMessage" class="success-message">
+    {{ successMessage }}
+  </div>
+</ion-content>

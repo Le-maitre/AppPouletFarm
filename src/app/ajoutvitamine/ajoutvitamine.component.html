@@ -1,0 +1,32 @@
+<div id="container" style="display: grid; " class="head animate__animated animate__fadeInDown ">
+  <ion-icon name="arrow-undo" style="display: block; font-size: 25px; padding: 15px  15px 0  15px; color: #fff;" [routerLink]="['../vitamine']"></ion-icon>
+  <div class="img" style="box-sizing: border-box;">
+    <img src="../../assets/vitamine.png" alt="" width="100px" height="80px" >
+    <p style="margin-right: 20px; color: #fff;"> <strong>Vitamine</strong></p>
+  </div>
+</div>
+
+<ion-content>
+
+  <form >
+    <div class="main">
+    <div  class="input-item">
+      <ion-label class="label">Nom</ion-label>
+      <input class="input" type="text" placeholder=""/>
+    </div >
+
+    <div  class="input-item">
+      <ion-label class="label">Quantité</ion-label>
+      <input class="input" type="number" placeholder=""/>
+    </div >
+    <div  class="input-item">
+      <ion-label class="label">Periode</ion-label>
+      <input class="input" type="date" placeholder=""/>
+    </div >
+    <div class="frame">
+      <button class="custom-btn btn-5"><span>Ajouter</span></button>
+
+      </div>
+    </div>
+   </form>
+</ion-content>

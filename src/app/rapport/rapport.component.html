@@ -1,0 +1,35 @@
+<div id="container" style="display: grid; " class="head animate__animated animate__fadeInDown ">
+  <ion-icon name="arrow-undo" style="display: block; font-size: 25px; padding: 15px  15px 0  15px; color: #fff;" [routerLink]="['../poussin']"></ion-icon>
+  <div class="img" style="box-sizing: border-box;">
+    <img src="../../assets/Rapport.png" alt="" width="120px" height="120px">
+    <p style="margin-right: 20px; color: #fff;"> <strong>Rapport</strong></p>
+  </div>
+</div>
+
+<ion-content class="animate__animated animate__fadeInUp" style="display: grid; grid-template-columns: 50% 50%; justify-content: space-between;">
+  <ion-list style="width: 100%; padding-right: 10px;">
+    <ion-item>
+      <ion-label class="label" position="floating" aria-label="Nombre de poussins">Nombre de poussins</ion-label>
+      <ion-input class="input" type="number" [(ngModel)]="nombreDePoussins"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label class="label" position="floating" aria-label="Nombre de décès">Nombre de décès</ion-label>
+      <ion-input class="input" type="number" [(ngModel)]="nombreDeDeces"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-label class="label" position="floating" aria-label="Prix du kilo">Prix du kilo</ion-label>
+      <ion-input class="input" type="number" [(ngModel)]="prixDuKilo"></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-button expand="block" (click)="genererRapport()">Soumettre</ion-button>
+    </ion-item>
+  </ion-list>
+  
+  <ion-item *ngIf="rapportGenere" style="width: 100%; padding-left: 10px;">
+    <ion-label>Rapport généré en se basant sur les poulets performants de plus de 35 jours:</ion-label>
+    <ion-note slot="end" style="font-weight: bold; color: black;">{{ rapportGenere | currency: 'XOF' }}</ion-note>
+  </ion-item>
+</ion-content>

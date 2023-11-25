@@ -1,15 +1,43 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { TabsPageModule } from './tabs/tabs.module';
+import { Tab1Page } from './tab1/tab1.page';
+import { TabsPage } from './tabs/tabs.page';
+import { HomeComponent } from './home/home.component';
+import { EntreeComponent } from './entree/entree.component';
 
 const routes: Routes = [
-  {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
+
   {
     path: '',
-    redirectTo: 'home',
-    pathMatch: 'full'
+    loadChildren: () => import('./connexion/connexion.module').then(m => m.ConnexionPageModule)
+  },
+  
+  {
+    path: 'connexion',
+    loadChildren: () => import('./connexion/connexion.module').then(m => m.ConnexionPageModule)
+  },
+  {
+    path: 'Accueil',
+    loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule)
+  },
+  {
+    path: 'inscription',
+    loadChildren: () => import('./inscription/inscription.module').then(m => m.InscriptionPageModule)
+  },
+  {
+    path: 'tabs',
+    component: TabsPage,
+    children: [
+      {
+        path: 'tab1',
+        loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule)
+      },
+      {
+        path: 'tab2',
+        loadChildren: () => import('./tab2/tab2.module').then(m => m.Tab2PageModule)
+      },
+    ]
   },
 ];
 
@@ -19,4 +47,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

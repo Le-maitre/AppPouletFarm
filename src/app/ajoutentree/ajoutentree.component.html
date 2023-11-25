@@ -1,0 +1,43 @@
+<div id="container" style="display: grid; " class="head animate__animated animate__fadeInDown ">
+  <ion-icon name="arrow-undo" style="display: block; font-size: 25px; padding: 15px  15px 0  15px; color: #fff;" [routerLink]="['../entree']"></ion-icon>
+  <div class="img" style="box-sizing: border-box;">
+    <img src="../../assets/poussins.png" alt="" width="100px" height="80px" >
+    <p style="margin-right: 20px; color: #fff;"> <strong>Entrées</strong></p>
+  </div>
+</div>
+
+<ion-content>
+
+  <form (ngSubmit)="addEntry()">
+    <div class="main">
+      <div class="input-item">
+        <ion-label class="label">Nom</ion-label>
+        <input class="input" type="text" placeholder="" name="nom" [(ngModel)]="formData.nom" required/>
+      </div>
+  
+      <div class="input-item">
+        <ion-label class="label">Nombre de Poussins</ion-label>
+        <input class="input" type="text" placeholder="" name="nombrePoussins" [(ngModel)]="formData.nombrePoussins" required/>
+      </div>
+  
+      <div class="input-item">
+        <ion-label class="label">Date d'Entrée</ion-label>
+        <input class="input" type="date" placeholder="" name="dateEntree" [(ngModel)]="formData.dateEntree" required/>
+      </div>
+  
+      <div class="input-item">
+        <ion-label class="label">Date de Sortie</ion-label>
+        <input class="input" type="date" placeholder="" name="dateSortie" [(ngModel)]="formData.dateSortie" required/>
+      </div>
+  
+      <div class="frame">
+        <button type="submit" class="custom-btn btn-5" ><span>Ajouter</span></button>
+      </div>
+    </div>
+  </form>
+   <!-- Success message display -->
+   <div *ngIf="successMessage" class="success-message" style="text-align: center; font-weight: bold;">
+    {{ successMessage }}
+  </div>
+  
+</ion-content>

@@ -1,0 +1,21 @@
+<div id="container" style="display: grid; " class="head animate__animated animate__fadeInDown ">
+  <ion-icon name="arrow-undo" style="display: block; font-size: 25px; padding: 15px  15px 0  15px; color: #fff;" [routerLink]="['../poussin', entry?.id || '']"></ion-icon>
+  <div class="img" style="box-sizing: border-box;">
+    <img src="../../assets/poussins.png" alt="" width="120px" height="120px">
+    <p style="margin-right: 20px; color: #fff;"> <strong>Lot 1</strong></p>
+  </div>
+</div> 
+
+<ion-content class=" animate__animated animate__fadeInUp ">
+
+  <ion-card style="border-radius: 25px; background-color: gray; color: black;">
+    <ion-card-header>
+    </ion-card-header>
+    <ion-card-content style="text-align: center; justify-content: center;">
+      <ion-label style="font-size: 20px; font-weight: bold;"><strong>Nom:</strong> {{ entry?.nom }}</ion-label> <br>
+      <ion-label style="font-size: 20px; font-weight: bold;"><strong>Nombre de Poussins:</strong> {{ entry?.nombrePoussins }}</ion-label> <br>
+      <ion-label style="font-size: 20px; font-weight: bold;"><strong>Date d'Entrée:</strong> {{ entry?.dateEntree }}</ion-label><br>
+      <ion-label style="font-size: 20px; font-weight: bold;"><strong>Date de Sortie:</strong> {{ entry?.dateSortie }}</ion-label>
+    </ion-card-content>
+  </ion-card>
+  </ion-content>

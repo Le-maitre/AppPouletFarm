@@ -1,0 +1,56 @@
+<div id="container" style="display: grid; " class="head animate__animated animate__fadeInDown ">
+  <ion-icon name="arrow-undo" style="display: block; font-size: 25px; padding: 15px  15px 0  15px; color: #fff;" [routerLink]="['../entree']"></ion-icon>
+  <div class="img" style="box-sizing: border-box;">
+    <img src="../../assets/poussins.png" alt="" width="100px" height="80px" >
+    <p style="margin-right: 20px; color: #fff;"> <strong>{{ entry?.nom }}</strong></p>
+  </div>
+</div>
+<ion-content  style="border-radius: 200px;" class="card animate__animated animate__fadeInUp " >
+  <div class="elem">
+      <div>
+        <div class="card animate__animated animate__fadeInUp ">
+
+          <a [routerLink]="['detail']" style="text-decoration: none;">
+          <ion-card style="border-radius: 25px;">
+            <div class="logoimg" style="background-color: orange;"><img alt="Silhouette of mountains" src="../../assets/poussins.png" width="100px" height="80px" /></div>
+            <ion-card-header>
+              <ion-card-title style="font-size: 20px; text-align: center; font-weight: bold; color: #005B2F;">Detail</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </a>
+          <!---->
+          <a  [routerLink]="['bilan']" style="text-decoration: none;">
+          <ion-card style="border-radius: 25px;">
+            <div class="logoimg" style="background-color: rgb(0, 255, 128);"><img alt="Silhouette of mountains" src="../../assets/bilan.png" width="100px" height="80px" /></div>
+            <ion-card-header>
+              <ion-card-title style="font-size: 20px; text-align: center; font-weight: bold; color: #005B2F;">Bilan</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </a>
+          <!---->
+          <!---->
+          <a [routerLink]="['gestion']" style="text-decoration: none;">
+          <ion-card style="border-radius: 25px;">
+            <div class="logoimg" style="background-color: rgb(0, 255, 128);"><img style="margin-top: 1rem;" alt="Silhouette of mountains" src="../../assets/Gestion.png" width="50px" height="50px" /></div>
+            <ion-card-header>
+              <ion-card-title style="font-size: 20px; text-align: center ; font-weight: bold; color: #005B2F;">Gestion</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </a>
+          <!---->
+          <!---->
+          <a [routerLink]="['rapport']" style="text-decoration: none;">
+          <ion-card style="border-radius: 25px; " id="card">
+            <div class="logoimg" style="background-color: orange;"><img style="margin-top: 1rem;" alt="Silhouette of mountains" src="../../assets/Rapport.png" width="50px" height="50px" /></div>
+            <ion-card-header>
+              <ion-card-title style="font-size: 20px; text-align: center ; font-weight: bold; color: #005B2F;" >Rapport</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+          </a>
+          <!---->
+
+
+        </div>
+    </div>
+  </div>
+  </ion-content>
