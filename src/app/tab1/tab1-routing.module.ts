@@ -39,6 +39,9 @@ import { AjoutmortComponent } from '../ajoutmort/ajoutmort.component';
 import { ModifiermortComponent } from '../modifiermort/modifiermort.component';
 import { DetailalerteComponent } from '../detailalerte/detailalerte.component';
 import { DemarrageComponent } from '../demarrage/demarrage.component';
+import { CroissanceComponent } from '../croissance/croissance.component';
+import { FinitionComponent } from '../finition/finition.component';
+import { SanteComponent } from '../sante/sante.component';
 
 
 const routes: Routes = [
@@ -53,6 +56,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
+  },
+  {
+    path: 'sante',
+    component: SanteComponent,
   },
   {
     path: 'poussin/:id',
@@ -159,6 +166,14 @@ const routes: Routes = [
   {
     path: 'forum',
     component: ForumComponent,
+  },
+  {
+    path: 'croissance',
+    component: CroissanceComponent,
+  },
+  {
+    path: 'finition',
+    component: FinitionComponent,
   },
   {
     path: 'modifiertachebilantache',
