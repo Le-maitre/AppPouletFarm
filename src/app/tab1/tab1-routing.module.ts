@@ -42,6 +42,7 @@ import { DemarrageComponent } from '../demarrage/demarrage.component';
 import { CroissanceComponent } from '../croissance/croissance.component';
 import { FinitionComponent } from '../finition/finition.component';
 import { SanteComponent } from '../sante/sante.component';
+import { AjoutforumComponent } from '../ajoutforum/ajoutforum.component';
 
 
 const routes: Routes = [
@@ -57,6 +58,11 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
   },
+  { path: 'ajoutforum', 
+  component: AjoutforumComponent
+ }, 
+
+
   {
     path: 'sante',
     component: SanteComponent,

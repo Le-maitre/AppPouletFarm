@@ -8,7 +8,7 @@
 
 <ion-content class="ion-padding">
 <!-- <ion-label style=" margin-left: 20px ; margin-top: 10px"><strong></strong></ion-label> -->
-<ion-card routerLink="/ajoutforum" class="new-post-card">
+<ion-card routerLink="../ajoutforum" class="new-post-card">
   <ion-card-content class="ion-text-center" style="cursor: pointer;">
     <ion-row class="ion-align-items-center ion-justify-content-between">
       <ion-icon name="chatbubbles" size="medium" color="primary"></ion-icon>
@@ -35,9 +35,11 @@
       <ion-img [src]="post.image"></ion-img>
     </ion-card-content>
     <ion-row class="ion-justify-content-between">
-      <ion-button color="primary" fill="clear">Like {{ post.likes }}</ion-button>
+      <ion-button (click)="toggleLike(post)" [color]="isLikedByUser(post) ? 'primary' : 'medium'" fill="clear">
+        {{ isLikedByUser(post) ? 'Dislike' : 'Like' }} {{ post.likes }}
+      </ion-button>
       <ion-button color="secondary" fill="clear">Commenter</ion-button>
-      <ion-button color="secondary" fill="clear" expand="full" (click)="showOptionsMenu(post)">
+      <ion-button color="secondary" fill="clear" expand="full" *ngIf="userLoggedInName === post.author" (click)="showOptionsMenu(post)">
         <ion-icon name="ellipsis-horizontal"></ion-icon>
       </ion-button>
       <ion-item-options side="end" *ngIf="activeMenu === post.id">

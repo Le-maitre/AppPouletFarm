@@ -49,6 +49,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns'; // Ada
 import { CroissanceComponent } from '../croissance/croissance.component';
 import { FinitionComponent } from '../finition/finition.component';
 import { SanteComponent } from '../sante/sante.component';
+import { AjoutforumComponent } from '../ajoutforum/ajoutforum.component';
 
 
 @NgModule({
@@ -66,7 +67,7 @@ import { SanteComponent } from '../sante/sante.component';
   declarations: [Tab1Page,HomeComponent,PoussinComponent,DetailComponent,BilanComponent,GestionComponent,DetailbilanComponent,
   DetailtacheComponent,ModifierentreeComponent,AjoutentreeComponent,ModifiertachebilanComponent,VaccinComponent,DetailvaccinComponent,AjoutvaccinComponent,ModifiervaccinComponent,AlimentComponent,StockComponent,VitamineComponent,MortComponent,
 AjoutbilanComponent,AjouttachebilanComponent,ModifiertachebilantacheComponent,DetailalimentComponent,AjoutalimenttComponent,ModifieralimenttComponent,AjoutvitamineComponent,DetailvitamineComponent,ModifiervitamineComponent,
-DetailmortComponent,AjoutmortComponent,ModifiermortComponent,AlerteComponent,DetailalerteComponent,GuideComponent,DemarrageComponent, ForumComponent, RapportComponent, CalendrierComponent, CroissanceComponent, FinitionComponent, SanteComponent
+DetailmortComponent,AjoutmortComponent,ModifiermortComponent,AlerteComponent,DetailalerteComponent,GuideComponent,DemarrageComponent, ForumComponent, RapportComponent, CalendrierComponent, CroissanceComponent, FinitionComponent, SanteComponent, AjoutforumComponent
 ]
 })
 export class Tab1PageModule {}
