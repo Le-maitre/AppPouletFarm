@@ -29,12 +29,18 @@ export class RapportComponent  implements OnInit {
     }
   }
 async presentAlert() {
+  const roundedRapport = Math.round(this.rapportGenere).toString(); // Convertir la valeur arrondie en chaîne de caractères
+  const formattedRapport = roundedRapport.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); // Ajouter un espace tous les trois chiffres
+
   const alert = await this.alertController.create({
     header: 'Rapport généré pour les poulets performants de plus de 35jrs',
-    message: `La valeur du rapport est ${this.rapportGenere} XOF`,
+    message: `
+      La valeur du rapport est : ${formattedRapport}  XOF `,
     buttons: ['OK']
   });
   await alert.present();
 }
+
+  
 }
   

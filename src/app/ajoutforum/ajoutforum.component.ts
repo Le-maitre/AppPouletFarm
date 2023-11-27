@@ -23,7 +23,7 @@ export class AjoutforumComponent  implements OnInit {
 
     this.forumService.addPost(newPost);
     
-    this.router.navigate(['./forum']);
+    this.router.navigate(['forum']);
   }
   selectedImage: string | ArrayBuffer | null = null;
   description: string = '';
