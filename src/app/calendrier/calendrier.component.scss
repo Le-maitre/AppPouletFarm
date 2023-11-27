@@ -1,0 +1,39 @@
+h2 {
+    margin: 0;
+    font-size: 16px;
+    color: blue; /* Modification de la couleur du texte en bleu */
+  }
+  
+  ul {
+    margin: 0;
+    padding: 0 0 0 1.5em;
+  }
+  
+  li {
+    margin: 1.5em 0;
+    padding: 0;
+  }
+  
+  b { /* utilisé pour les dates/heures des événements */
+    margin-right: 3px;
+  }
+  
+  .calendrier {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+    font-size: 14px;
+    color: blue; /* Modification de la couleur du texte du calendrier en bleu */
+  }
+  
+  .demo-app-sidebar-section {
+    padding: 2em;
+  }
+  
+  .mobile-buttons {
+    position: fixed;
+    bottom: 40px;
+    right: 30px;
+  }
+  

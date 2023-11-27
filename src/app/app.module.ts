@@ -14,10 +14,11 @@ import { EntreeComponent } from './entree/entree.component';
 import { FormsModule } from '@angular/forms'; // Import 
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
   declarations: [AppComponent,EntreeComponent],
-  imports: [BrowserAnimationsModule,HttpClientModule,HttpClientJsonpModule,FormsModule,ReactiveFormsModule ,CalendarModule.forRoot({
+  imports: [FullCalendarModule,BrowserAnimationsModule,HttpClientModule,HttpClientJsonpModule,FormsModule,ReactiveFormsModule ,CalendarModule.forRoot({
     provide: DateAdapter,
     useFactory: adapterFactory,
   }), NgCalendarModule,BrowserModule, IonicModule.forRoot(),AppRoutingModule],

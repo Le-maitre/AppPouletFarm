@@ -23,7 +23,7 @@
 
 
   <!-- Forum Posts -->
-  <ion-card *ngFor="let post of forumPosts">
+  <ion-card *ngFor="let post of forumPosts" (click)="redirectPublication(post.id)">
     <ion-card-header>
       <ion-row class="ion-align-items-center">
         <ion-icon name="person" size="large"></ion-icon>
@@ -38,7 +38,26 @@
       <ion-button (click)="toggleLike(post)" [color]="isLikedByUser(post) ? 'primary' : 'medium'" fill="clear">
         {{ isLikedByUser(post) ? 'Dislike' : 'Like' }} {{ post.likes }}
       </ion-button>
-      <ion-button color="secondary" fill="clear">Commenter</ion-button>
+      <ion-button color="secondary" fill="clear" (click)="toggleCommentSection(post)">
+        {{ isCommentSectionOpen(post) ? 'Masquer Commentaires' : 'Commenter' }}
+      </ion-button>
+              <!-- Section pour ajouter un commentaire -->
+              <div *ngIf="isCommentSectionOpen(post)" class="ion-align-items-center" style="display: flex;">
+                <ion-item>
+                  <ion-label position="floating">Ajouter un commentaire</ion-label>
+                  <ion-textarea [(ngModel)]="newComment[post.id]" placeholder="Entrez votre commentaire"></ion-textarea>
+                </ion-item>
+                <ion-button color="primary" (click)="addComment(post)" class="ion-margin-start">
+                  <ion-icon name="send" slot="start"></ion-icon></ion-button>
+              </div>
+              
+
+          <!-- Liste des commentaires existants -->
+          <ion-list *ngIf="post.comments && post.comments.length > 0">
+            <ion-item *ngFor="let comment of post.comments">
+              <ion-label>{{ comment.author }} : {{ comment.text }}</ion-label>
+            </ion-item>
+          </ion-list>
       <ion-button color="secondary" fill="clear" expand="full" *ngIf="userLoggedInName === post.author" (click)="showOptionsMenu(post)">
         <ion-icon name="ellipsis-horizontal"></ion-icon>
       </ion-button>

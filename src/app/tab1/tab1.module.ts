@@ -50,7 +50,8 @@ import { CroissanceComponent } from '../croissance/croissance.component';
 import { FinitionComponent } from '../finition/finition.component';
 import { SanteComponent } from '../sante/sante.component';
 import { AjoutforumComponent } from '../ajoutforum/ajoutforum.component';
-
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { PublicationComponent } from '../publication/publication.component';
 
 @NgModule({
   imports: [
@@ -62,6 +63,7 @@ import { AjoutforumComponent } from '../ajoutforum/ajoutforum.component';
       useFactory: adapterFactory,
     }),
     FormsModule,
+    FullCalendarModule,
     Tab1PageRoutingModule
   ],
   declarations: [Tab1Page,HomeComponent,PoussinComponent,DetailComponent,BilanComponent,GestionComponent,DetailbilanComponent,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { User } from '../user';
 import { ForumService } from '../forum.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-forum',
   templateUrl: './forum.component.html',
@@ -12,11 +13,35 @@ export class ForumComponent  implements OnInit {
     activeMenu: string | null = null;
     userLoggedInName: string = 'Kaly Diallo'; // Nom de l'utilisateur connecté
     forumPosts: any[] = []; // Déclaration de la propriété forumPosts
-  
-    constructor(private forumService: ForumService,private alertController: AlertController) {}
+    // Déclaration des variables nécessaires
+newComment: { [key: string]: string } = {};
+commentSectionsOpen: { [key: string]: boolean } = {};
 
+// Méthodes pour gérer les commentaires
+toggleCommentSection(post: any) {
+  this.commentSectionsOpen[post.id] = !this.commentSectionsOpen[post.id];
+}
+
+isCommentSectionOpen(post: any): boolean {
+  return this.commentSectionsOpen[post.id] || false;
+}
+
+addComment(post: any) {
+  const commentText = this.newComment[post.id];
+  // Ajoutez la logique pour sauvegarder le commentaire dans la publication correspondante (post)
+  // post.comments.push({ author: loggedInUser, text: commentText });
+  // Réinitialisez le champ de texte du commentaire
+  this.newComment[post.id] = '';
+}
+
+  
+    constructor(private forumService: ForumService,private alertController: AlertController, private router: Router) {}
+  
     ngOnInit() {
       this.forumPosts = this.forumService.forumPosts;
+    }
+    redirectPublication(postId: number) {
+      this.router.navigate(['/publication', postId]); // Assurez-vous d'avoir une route correspondante avec le paramètre postId
     }
     async showOptionsMenu(post: any) {
       this.activeMenu = post.id;
