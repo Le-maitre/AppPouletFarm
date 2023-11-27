@@ -51,7 +51,7 @@ import { FinitionComponent } from '../finition/finition.component';
 import { SanteComponent } from '../sante/sante.component';
 import { AjoutforumComponent } from '../ajoutforum/ajoutforum.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
-import { PublicationComponent } from '../publication/publication.component';
+
 
 @NgModule({
   imports: [
