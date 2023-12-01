@@ -100,7 +100,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'detailvaccin',
+    path: 'poussin/:id/vaccin:id/detailvaccin',
     component: DetailvaccinComponent,
   },
   {
