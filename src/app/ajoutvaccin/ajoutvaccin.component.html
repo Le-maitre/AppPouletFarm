@@ -8,16 +8,16 @@
 
 <ion-content>
 
-  <form >
+  <form (ngSubmit)="ajoutervaccin()" >
     <div class="main">
     <div  class="input-item">
       <ion-label class="label">Type</ion-label>
-      <input class="input" type="text" placeholder=""/>
+      <input class="input" type="text" name="typeVaccin" [(ngModel)]="formData.typeVaccin" required/>
     </div >
 
     <div  class="input-item">
       <ion-label class="label">Date de Vaccination</ion-label>
-      <input class="input" type="date" placeholder=""/>
+      <input class="input" type="date" name="dateVaccination" [(ngModel)]="formData.dateVaccination" required/>
     </div >
     <div class="frame">
       <button class="custom-btn btn-5"><span>Ajouter</span></button>

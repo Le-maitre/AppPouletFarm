@@ -16,7 +16,7 @@ export class ModifierentreeComponent  implements OnInit {
     dateSortie: new Date(),
     // Other properties if present
   };
-
+ userid:any;
   constructor(private route: ActivatedRoute, private userentriesService: UserentriesService) {}
 
   ngOnInit(): void {
@@ -26,9 +26,10 @@ export class ModifierentreeComponent  implements OnInit {
       this.getEntryDetails(userId, entryId);
     });
   }
-
+ 
   getEntryDetails(userId: number, entryId: number): void {
-    this.userentriesService.getEntryById(entryId).subscribe(
+    this.userid = localStorage.getItem("userid")
+    this.userentriesService.getEntryById(entryId,parseInt(this.userid!)).subscribe(
       entry => {
         this.entry = entry;
       },

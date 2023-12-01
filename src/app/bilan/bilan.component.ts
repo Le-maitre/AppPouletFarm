@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BilanService } from '../bilan.service';
 import { AlertController } from '@ionic/angular';
 
@@ -10,27 +10,46 @@ import { AlertController } from '@ionic/angular';
 })
 export class BilanComponent  implements OnInit {
   bilans: any[] = []; // Ensure the property is named 'bilans'
-  constructor( private bilanService: BilanService,
+  entryId: any;
+  bilanEntries: any[] = [];
+  
+  constructor( private bilanService: BilanService,private router: Router,
     private route: ActivatedRoute, private alertController: AlertController) { }
 
-  ngOnInit(): void {
-    this.fetchBilansForEntry();
-  }
+    ngOnInit(): void {
+      this.entryId = localStorage.getItem("entry");
+      if (this.entryId !== null) {
+        this.entryId = parseInt(this.entryId);
+        if (!isNaN(this.entryId)) { // Vérifier si entryId est un nombre valide
+          this.getBilansForEntry(this.entryId); // Appeler la méthode pour récupérer les bilans
+        }
+      }
+    }
+    
+  
+    navigateToDetailBilan(bilanId: number): void {
+      this.router.navigate(['../detailbilan', bilanId]);
+    }
+    
 
-  fetchBilansForEntry(): void {
-    const entryId = 1;
-    this.bilanService.getBilansForEntry(entryId).subscribe((data: any[]) => {
+  getBilansForEntry(entryId:number): void {
+    
+    this.bilanService.getBilansForEntry(entryId!).subscribe((data: any[]) => {
       console.log(data); 
       this.bilans = data;
     });
   }
+
    // Méthode pour supprimer un bilan par son ID
    deleteBilan(bilanId: number): void {
     this.bilanService.deleteBilanById(bilanId).subscribe(() => {
       // Rafraîchir la liste des bilans après la suppression
-      this.fetchBilansForEntry();
+      if (this.entryId !== null) {
+        this.getBilansForEntry(parseInt(this.entryId));
+      }
     });
   }
+  
 
 
   // Méthode pour afficher la boîte de dialogue de confirmation

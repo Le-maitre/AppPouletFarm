@@ -15,8 +15,8 @@ export class EntreeComponent  implements OnInit {
 
   ngOnInit() {
     // Assuming you have the user ID available, replace 'userId' with the actual user ID
-    const userId = 1; // Replace this with the actual user ID
-    this.userentriesService.getUserEntries(userId).subscribe(
+    const userId = localStorage.getItem("userId");
+    this.userentriesService.getUserEntries(parseInt(userId!)).subscribe(
       (entries: any[]) => {
         this.userEntries = entries;
       },
@@ -28,10 +28,10 @@ export class EntreeComponent  implements OnInit {
 
  // Method to delete an entry
  async deleteEntry(entryId: number) {
-  const userId = 1; // Replace with the actual user ID
+  const userId = localStorage.getItem("userId"); // Replace with the actual user ID
 
   const confirmAlert = await this.alertController.create({
-    header: 'Confirmation_Suppression',
+    header: 'Suppression',
     message: 'êtes vous sûr de vouloir supprimer cette entréé?',
     buttons: [
       {
@@ -45,7 +45,7 @@ export class EntreeComponent  implements OnInit {
         text: 'Yes',
         handler: () => {
           // Proceed with deletion
-          this.performDeletion(userId, entryId);
+          this.performDeletion(parseInt(userId!), entryId);
         }
       }
     ]

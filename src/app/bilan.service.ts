@@ -11,6 +11,7 @@ export class BilanService {
   constructor(private http: HttpClient) { }
 
   getBilansForEntry(entryId: number): Observable<any[]> {
+    console.log("entree==========",entryId);
     return this.http.get<any[]>(`${this.baseUrl}/entree/${entryId}`);
   }
 
@@ -18,7 +19,8 @@ export class BilanService {
     return this.http.delete(`${this.baseUrl}/${bilanId}`);
   }
    // Ajouter un bilan associé à une entrée
-   ajouterBilan(entreeId: number, nouveauBilan: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/entree/${entreeId}`, nouveauBilan);
+   ajouterBilan(entryId: number, nouveauBilan: any): Observable<any> {
+    console.log("entryservice====",entryId)
+    return this.http.post<any>(`${this.baseUrl}/entree/${entryId}`, nouveauBilan);
   }
 }

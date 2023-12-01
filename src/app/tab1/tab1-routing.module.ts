@@ -80,7 +80,7 @@ const routes: Routes = [
     component: BilanComponent,
     children: [
       {
-        path: 'detailbilan/:bilanId',
+        path: 'detailbilan/:id',
         component: DetailbilanComponent
       }
     ]
@@ -91,16 +91,14 @@ const routes: Routes = [
   },
   // {
   //   path: 'detailbilan/:id',
-  //   component: DetailbilanComponent,
+  //   component: DetailbilanComponent
   // },
+  
   {
     path: 'poussin/:id/rapport',
     component: RapportComponent,
   },
-  {
-    path: 'vaccin',
-    component: VaccinComponent,
-  },
+
   {
     path: 'detailvaccin',
     component: DetailvaccinComponent,
@@ -146,7 +144,7 @@ const routes: Routes = [
     component: ModifieralimenttComponent,
   },
   {
-    path: 'ajoutvaccin',
+    path: 'poussin/:id/ajoutvaccin',
     component: AjoutvaccinComponent,
   },
   {
@@ -154,19 +152,19 @@ const routes: Routes = [
     component: ModifiervaccinComponent,
   },
   {
-    path: 'aliment',
+    path: 'poussin/:id/aliment',
     component: AlimentComponent,
   },
   {
-    path: 'stock',
+    path: 'poussin/:id/stock',
     component: StockComponent,
   },
   {
-    path: 'vitamine',
+    path: 'poussin/:id/vitamine',
     component: VitamineComponent,
   },
   {
-    path: 'mort',
+    path: 'poussin/:id/mort',
     component: MortComponent,
   },
   {
@@ -224,6 +222,10 @@ const routes: Routes = [
   {
     path: 'guide',
     component: GuideComponent,
+  },
+  {
+    path: 'poussin/:id/vaccin',
+    component: VaccinComponent,
   }
 ];
 

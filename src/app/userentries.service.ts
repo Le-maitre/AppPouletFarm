@@ -25,8 +25,9 @@ export class UserentriesService {
     addEntry(userId: number, entryData: any) {
       return this.http.post(`http://localhost:8080/api/users/${userId}/entrees/create`, entryData);
     }
-    getEntryById(entryId: number): Observable<Entry> {
-      const url = `${this.apiUrl}/api/users/1/entrees/${entryId}`;
+  getEntryById(entryId: number,userId:number): Observable<Entry> {
+    console.log("value================",userId);
+      const url = `${this.apiUrl}/api/users/${userId}/entrees/${entryId}`;
       return this.http.get<Entry>(url);
     }
   

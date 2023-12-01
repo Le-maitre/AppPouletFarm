@@ -21,6 +21,7 @@ export class ConnexionPage implements OnInit {
   login() {
     this.userService.loginUser(this.user).subscribe(
       (response) => {
+        localStorage.setItem("userId",response.id);
          // Authentication successful, navigate to home page or desired route
          this.navCtrl.navigateRoot('/tabs/tab1'); // Change '/home' to your home route
         },
