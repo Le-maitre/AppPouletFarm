@@ -10,7 +10,6 @@ import { GuideComponent } from '../guide/guide.component';
 import { PoussinComponent } from '../poussin/poussin.component';
 import { DetailComponent } from '../detail/detail.component';
 import { BilanComponent } from '../bilan/bilan.component';
-import { GestionComponent } from '../gestion/gestion.component';
 import { RapportComponent } from '../rapport/rapport.component';
 import { DetailbilanComponent } from '../detailbilan/detailbilan.component';
 import { DetailtacheComponent } from '../detailtache/detailtache.component';
@@ -84,10 +83,6 @@ const routes: Routes = [
         component: DetailbilanComponent
       }
     ]
-  },
-  {
-    path: 'poussin/:id/gestion',
-    component: GestionComponent,
   },
   // {
   //   path: 'detailbilan/:id',

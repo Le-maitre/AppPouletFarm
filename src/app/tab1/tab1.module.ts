@@ -10,7 +10,6 @@ import { HomeComponent } from '../home/home.component';
 import { PoussinComponent } from '../poussin/poussin.component';
 import { DetailComponent } from '../detail/detail.component';
 import { BilanComponent } from '../bilan/bilan.component';
-import { GestionComponent } from '../gestion/gestion.component';
 import { DetailbilanComponent } from '../detailbilan/detailbilan.component';
 import { DetailtacheComponent } from '../detailtache/detailtache.component';
 import { ModifierentreeComponent } from '../modifierentree/modifierentree.component';
@@ -66,7 +65,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     FullCalendarModule,
     Tab1PageRoutingModule
   ],
-  declarations: [Tab1Page,HomeComponent,PoussinComponent,DetailComponent,BilanComponent,GestionComponent,DetailbilanComponent,
+  declarations: [Tab1Page,HomeComponent,PoussinComponent,DetailComponent,BilanComponent,DetailbilanComponent,
   DetailtacheComponent,ModifierentreeComponent,AjoutentreeComponent,ModifiertachebilanComponent,VaccinComponent,DetailvaccinComponent,AjoutvaccinComponent,ModifiervaccinComponent,AlimentComponent,StockComponent,VitamineComponent,MortComponent,
 AjoutbilanComponent,AjouttachebilanComponent,ModifiertachebilantacheComponent,DetailalimentComponent,AjoutalimenttComponent,ModifieralimenttComponent,AjoutvitamineComponent,DetailvitamineComponent,ModifiervitamineComponent,
 DetailmortComponent,AjoutmortComponent,ModifiermortComponent,AlerteComponent,DetailalerteComponent,GuideComponent,DemarrageComponent, ForumComponent, RapportComponent, CalendrierComponent, CroissanceComponent, FinitionComponent, SanteComponent, AjoutforumComponent
