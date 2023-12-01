@@ -8,25 +8,21 @@
 
 <ion-content>
 
-  <form >
+  <form (ngSubmit)="ajouterPerte()">
     <div class="main">
-    <div  class="input-item">
-      <ion-label class="label">Nom</ion-label>
-      <input class="input" type="text" placeholder=""/>
-    </div >
 
     <div  class="input-item">
       <ion-label class="label">Nombre</ion-label>
-      <input class="input" type="number" placeholder=""/>
+      <input class="input" type="number" name="nombre" [(ngModel)]="formData.nombre" required/>
     </div >
     <div  class="input-item">
       <ion-label class="label">Cause</ion-label>
-      <input class="input" type="text" placeholder=""/>
+      <input class="input" type="text" name="cause" [(ngModel)]="formData.causeDeces" required/>
     </div >
 
     <div  class="input-item">
       <ion-label class="label">Date</ion-label>
-      <input class="input" type="Date" placeholder=""/>
+      <input class="input" type="Date" name="datePerte" [(ngModel)]="formData.datePerte" required/>
     </div >
     <div class="frame">
       <button class="custom-btn btn-5"><span>Ajouter</span></button>

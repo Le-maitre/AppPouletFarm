@@ -19,6 +19,8 @@ export class VaccinComponent  implements OnInit {
     private alertController: AlertController
   ) {}
 
+
+
   ngOnInit(): void {
     this.entryId = localStorage.getItem('entry');
     if (this.entryId !== null) {

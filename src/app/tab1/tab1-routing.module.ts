@@ -111,7 +111,7 @@ const routes: Routes = [
     component: DetailalerteComponent,
   },
   {
-    path: 'ajoutmort',
+    path: 'poussin/:id/ajoutmort',
     component: AjoutmortComponent
   },
   {
