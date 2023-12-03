@@ -8,11 +8,11 @@
 
 <ion-content>
 
-  <form >
+  <form  (ngSubmit)="ajouterAliment()">
     <div class="main">
       <div  class="input-item">
         <ion-label class="label">Type</ion-label>
-        <select class="input" name="type">
+        <select class="input" name="type"  [(ngModel)]="formData.typeNourriture" required>
           <option value="demarrage">Demarrage</option>
           <option value="croissance">Croissance</option>
           <option value="finition">Finition</option>
@@ -21,7 +21,7 @@
 
       <div  class="input-item">
         <ion-label class="label">Quantité</ion-label>
-        <input class="input" type="number" placeholder=""/>
+        <input class="input" type="number"name="quanite" [(ngModel)]="formData.quantite" required/>
       </div >
       <div class="frame">
         <button class="custom-btn btn-5"><span>Ajouter</span></button>

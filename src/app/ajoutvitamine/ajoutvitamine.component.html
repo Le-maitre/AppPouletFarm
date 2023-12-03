@@ -8,21 +8,18 @@
 
 <ion-content>
 
-  <form >
+  <form (ngSubmit)="ajoutervitamine()">
     <div class="main">
     <div  class="input-item">
       <ion-label class="label">Nom</ion-label>
-      <input class="input" type="text" placeholder=""/>
+      <input class="input" type="text" name="nomVitamine" [(ngModel)]="formData.nomVitamine" required/>
     </div >
 
     <div  class="input-item">
       <ion-label class="label">Quantité</ion-label>
-      <input class="input" type="number" placeholder=""/>
+      <input class="input" type="number" name="Quantite" [(ngModel)]="formData.quantite" required/>
     </div >
-    <div  class="input-item">
-      <ion-label class="label">Periode</ion-label>
-      <input class="input" type="date" placeholder=""/>
-    </div >
+  
     <div class="frame">
       <button class="custom-btn btn-5"><span>Ajouter</span></button>
 

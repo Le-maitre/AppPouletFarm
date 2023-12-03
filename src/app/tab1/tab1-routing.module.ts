@@ -119,11 +119,11 @@ const routes: Routes = [
     component: ModifiermortComponent,
   },
   {
-    path: 'ajoutvitamine',
+    path: 'poussin/:id/ajoutvitamine',
     component: AjoutvitamineComponent,
   },
   {
-    path: 'modifiervitamine',
+    path: 'poussin/:id/modifiervitamine',
     component: ModifiervitamineComponent,
   },
   {
@@ -131,7 +131,7 @@ const routes: Routes = [
     component: DetailalimentComponent
   },
   {
-    path: 'ajoutaliment',
+    path: 'poussin/:id/ajoutaliment',
     component: AjoutalimenttComponent
   },
   {

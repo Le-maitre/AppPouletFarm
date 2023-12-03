@@ -29,7 +29,7 @@
           <!-- <ion-label>{{element.frequence}} HZ </ion-label> -->
           <ion-icon name="create-outline" style="color: #005B2F; cursor: pointer; " [routerLink]="['../modifiervitamine']"></ion-icon>
           <!-- <ion-icon name="trash" style="color: red;"   id="present-alert" (click)="presentAlert(element.id)" ></ion-icon> -->
-          <ion-icon name="trash" style="color: red;cursor: pointer;"></ion-icon>
+          <ion-icon name="trash" style="color: red;cursor: pointer;" (click)="confirmDeleteVitamine(vitamine.id)"></ion-icon>
           </div>
             <!-- <ion-alert
             header="Alert!"
