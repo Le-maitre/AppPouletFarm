@@ -1,19 +1,25 @@
-import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
+
+  import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/core';
 import interactionPlugin from '@fullcalendar/interaction';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
-import { INITIAL_EVENTS } from '../event-utils';
+import { EventService } from '../event.service';
+
 function createEventId() {
   return String(Date.now());
 }
+
 @Component({
   selector: 'app-calendrier',
   templateUrl: './calendrier.component.html',
   styleUrls: ['./calendrier.component.scss'],
 })
 export class CalendrierComponent implements OnInit {
+  events: any[] = []; 
+  entryId: any;
+
   calendarVisible = true;
   calendarOptions: CalendarOptions = {
     plugins: [
@@ -22,14 +28,13 @@ export class CalendrierComponent implements OnInit {
       timeGridPlugin,
       listPlugin,
     ],
-     locale: 'fr',
+    locale: 'fr',
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
     initialView: 'dayGridMonth',
-    initialEvents: INITIAL_EVENTS,
     weekends: true,
     editable: true,
     selectable: true,
@@ -43,11 +48,34 @@ export class CalendrierComponent implements OnInit {
   
   currentEvents: EventApi[] = [];
 
-  constructor(private changeDetector: ChangeDetectorRef) {
-  }
-  ngOnInit(): void {
+  constructor(private changeDetector: ChangeDetectorRef, private eventService: EventService) {
   }
 
+  ngOnInit(): void {
+    const userId = localStorage.getItem('userId'); 
+    console.log("userid====",userId)
+    if (userId !== null) {
+      this.entryId = parseInt(userId);
+      if (!isNaN(this.entryId)) { 
+        this.getAllEvents(this.entryId); // Obtenir les événements pour cet utilisateur
+      }
+    }
+  }
+
+  getAllEvents(userId: number): void {
+    this.eventService.getAllEventsForUser(userId).subscribe((data: any[]) => {
+      console.log(data);
+      this.events = data;
+    });
+  }
+  ajouterEvenement() {
+    const nom = prompt('Nom de l\'événement :');
+    const dateEvent = prompt('Date de l\'événement (YYYY-MM-DD) :');
+  
+    if (nom !== null && dateEvent !== null) {
+      // ... Votre logique pour traiter les données entrées (par exemple, ajouter à la base de données) ...
+    }
+  }
   handleCalendarToggle() {
     this.calendarVisible = !this.calendarVisible;
   }

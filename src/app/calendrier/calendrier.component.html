@@ -1,24 +1,25 @@
 <div class='container'>
   <div class="calendrier" style='display: flex; justify-content: center; align-items: center;'>
-    <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
+    <full-calendar *ngIf='calendarVisible' [options]='calendarOptions' [events]='events'>
       <ng-template #eventContent let-arg>
         <b>{{ arg.timeText }}</b>
-        <i>{{ arg.event.title }}</i>
+        <i>{{ arg.event.nom }}</i> <!-- Afficher le nom de l'événement -->
       </ng-template>
     </full-calendar>
   </div>
 
   <div class='demo-app-sidebar-section'>
-    <h2>Tous les événements ({{currentEvents.length}})</h2>
+    <h2>Tous les événements ({{ events.length }})</h2>
     <ul>
-      <li *ngFor='let event of currentEvents'>
-        <b>{{event.startStr}}</b>
-        <i>{{event.title}}</i>
+      <li *ngFor='let event of events'>
+        <b>{{ event.dateEvent }}</b> <!-- Afficher la date de l'événement -->
+        <i>{{ event.nom }}</i> <!-- Afficher le nom de l'événement -->
       </li>
     </ul>
   </div>
   
-  <div class="mobile-buttons" style="position: fixed; bottom: 40px; right: 30px;">
-    <button class="mobile-button" style="font-size: 40px; color: blue;font-weight: bold;"> <ion-icon name="add"></ion-icon></button>
-  </div>
+ <!-- Bouton "Ajouter" -->
+ <div class="mobile-buttons" style="position: fixed; bottom: 40px; right: 30px;">
+  <button class="mobile-button" style="font-size: 40px; color: blue; font-weight: bold;" (click)="ajouterEvenement()"> <ion-icon name="add"></ion-icon></button>
+</div>
 </div>
