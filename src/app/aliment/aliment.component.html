@@ -16,8 +16,9 @@
 <ion-content>
   <div class="listuser animate__animated animate__fadeInUp ">
     <ion-card *ngFor="let aliment of aliments">
-      <ion-card-header>
-        {{ aliment.typeNourriture }}
+      <ion-card-header style="display: flex; ">
+          {{ aliment.typeNourriture }}
+        <ion-icon name="trash" style="color: red; cursor: pointer; margin-left: 280px;" (click)="deleteAliment(aliment.id)"></ion-icon>
       </ion-card-header>
       <ion-card-content>
         <p>{{ aliment.quantite }} KG</p>
