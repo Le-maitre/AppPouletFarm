@@ -50,13 +50,22 @@ import { FinitionComponent } from '../finition/finition.component';
 import { SanteComponent } from '../sante/sante.component';
 import { AjoutforumComponent } from '../ajoutforum/ajoutforum.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
-
+import { AjouterEvenementComponent } from '../ajouter-evenement/ajouter-evenement.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+// ... autres imports de modules Angular Material nécessaires
+import { CdkTableModule } from '@angular/cdk/table';
 
 @NgModule({
   imports: [
     NgCalendarModule,
     IonicModule,
     CommonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    CdkTableModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
@@ -68,7 +77,7 @@ import { FullCalendarModule } from '@fullcalendar/angular';
   declarations: [Tab1Page,HomeComponent,PoussinComponent,DetailComponent,BilanComponent,DetailbilanComponent,
   DetailtacheComponent,ModifierentreeComponent,AjoutentreeComponent,ModifiertachebilanComponent,VaccinComponent,DetailvaccinComponent,AjoutvaccinComponent,ModifiervaccinComponent,AlimentComponent,StockComponent,VitamineComponent,MortComponent,
 AjoutbilanComponent,AjouttachebilanComponent,ModifiertachebilantacheComponent,DetailalimentComponent,AjoutalimenttComponent,ModifieralimenttComponent,AjoutvitamineComponent,DetailvitamineComponent,ModifiervitamineComponent,
-DetailmortComponent,AjoutmortComponent,ModifiermortComponent,AlerteComponent,DetailalerteComponent,GuideComponent,DemarrageComponent, ForumComponent, RapportComponent, CalendrierComponent, CroissanceComponent, FinitionComponent, SanteComponent, AjoutforumComponent
+DetailmortComponent,AjoutmortComponent,ModifiermortComponent,AlerteComponent,DetailalerteComponent,GuideComponent,DemarrageComponent, ForumComponent, RapportComponent, CalendrierComponent, CroissanceComponent, FinitionComponent, SanteComponent, AjoutforumComponent,AjouterEvenementComponent
 ]
 })
 export class Tab1PageModule {}

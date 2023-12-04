@@ -15,10 +15,16 @@ import { FormsModule } from '@angular/forms'; // Import
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FullCalendarModule } from '@fullcalendar/angular';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+// ... autres imports de modules Angular Material nécessaires
+import { CdkTableModule } from '@angular/cdk/table';
 @NgModule({
   declarations: [AppComponent,EntreeComponent],
-  imports: [FullCalendarModule,BrowserAnimationsModule,HttpClientModule,HttpClientJsonpModule,FormsModule,ReactiveFormsModule ,CalendarModule.forRoot({
+  imports: [FullCalendarModule,BrowserAnimationsModule, MatInputModule,
+    MatButtonModule,
+    CdkTableModule,MatFormFieldModule,HttpClientModule,HttpClientJsonpModule,FormsModule,ReactiveFormsModule ,CalendarModule.forRoot({
     provide: DateAdapter,
     useFactory: adapterFactory,
   }), NgCalendarModule,BrowserModule, IonicModule.forRoot(),AppRoutingModule],

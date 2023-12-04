@@ -1,0 +1,20 @@
+<div class="conteneur">
+  <div class="centre">
+    <h1>Ajouter un événement</h1>
+
+    <form>
+      <mat-form-field>
+        <input matInput placeholder="Nom de l'événement" [(ngModel)]="nom">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput  type="datetime-local" [(ngModel)]="dateEvent">
+      </mat-form-field>
+      <div class="boutons">
+        <button mat-button class="bouton-annuler" (click)="fermer()">Annuler</button>
+        <button mat-button class="bouton-ajouter" (click)="ajouter()">Ajouter</button>
+   
+      </div>
+    </form>
+  </div>
+</div>

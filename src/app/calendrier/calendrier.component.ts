@@ -6,6 +6,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import { EventService } from '../event.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AjouterEvenementComponent } from '../ajouter-evenement/ajouter-evenement.component';
 
 function createEventId() {
   return String(Date.now());
@@ -48,7 +50,7 @@ export class CalendrierComponent implements OnInit {
   
   currentEvents: EventApi[] = [];
 
-  constructor(private changeDetector: ChangeDetectorRef, private eventService: EventService) {
+  constructor(private changeDetector: ChangeDetectorRef, private eventService: EventService, public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -68,13 +70,15 @@ export class CalendrierComponent implements OnInit {
       this.events = data;
     });
   }
-  ajouterEvenement() {
-    const nom = prompt('Nom de l\'événement :');
-    const dateEvent = prompt('Date de l\'événement (YYYY-MM-DD) :');
-  
-    if (nom !== null && dateEvent !== null) {
-      // ... Votre logique pour traiter les données entrées (par exemple, ajouter à la base de données) ...
-    }
+  ajouterEvenement(): void {
+    const dialogRef = this.dialog.open(AjouterEvenementComponent, {
+      width: '300px', // Définissez la largeur de la boîte de dialogue modale
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Boîte de dialogue fermée. Résultat :', result);
+      // Traitez ici le résultat obtenu après la fermeture de la boîte de dialogue
+    });
   }
   handleCalendarToggle() {
     this.calendarVisible = !this.calendarVisible;

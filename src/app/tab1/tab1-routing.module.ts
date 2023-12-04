@@ -166,6 +166,7 @@ const routes: Routes = [
     path: 'forum',
     component: ForumComponent,
   },
+  
   {
     path: 'croissance',
     component: CroissanceComponent,

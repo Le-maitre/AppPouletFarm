@@ -1,0 +1,29 @@
+.conteneur {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  
+  .centre {
+    text-align: center;
+    width: 300px; /* Ajustez la largeur selon vos besoins */
+  }
+  .mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  
+  .boutons {
+    display: flex;
+    justify-content: space-between;
+  }
+  .bouton-ajouter {
+    background-color: blue;
+    color: white;
+  }
+  
+  .bouton-annuler {
+    background-color: lightblue; /* Changer la couleur en fonction de vos besoins */
+    color: black; /* Changer la couleur en fonction de vos besoins */
+  }
