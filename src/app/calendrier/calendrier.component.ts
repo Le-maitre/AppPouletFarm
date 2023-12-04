@@ -90,21 +90,34 @@ export class CalendrierComponent implements OnInit {
   }
 
   handleDateSelect(selectInfo: DateSelectArg) {
-    const title = prompt('Please enter a new title for your event');
+    const title = prompt('Veuillez entrer un titre pour votre événement');
     const calendarApi = selectInfo.view.calendar;
-
-    calendarApi.unselect(); // clear date selection
-
+  
+    calendarApi.unselect(); // Effacer la sélection de date
+  
     if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay
-      });
+      const dateEvent = selectInfo.startStr;
+      const newEvent = {
+        nom: title,
+        dateEvent: new Date(dateEvent)
+      };
+  
+      const userId = localStorage.getItem('userId');
+      if (userId !== null) {
+        const userIdNumber = parseInt(userId);
+        if (!isNaN(userIdNumber)) {
+          this.eventService.createEvent(userIdNumber, newEvent as any).subscribe((createdEvent: any) => {
+            console.log('Événement ajouté avec succès :', createdEvent);
+            // Traitez ici la réussite de l'ajout de l'événement dans la base de données
+          }, error => {
+            console.error('Erreur lors de l\'ajout de l\'événement :', error);
+            // Traitez ici les erreurs lors de l'ajout de l'événement
+          });
+        }
+      }
     }
   }
+  
 
   handleEventClick(clickInfo: EventClickArg) {
     if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
