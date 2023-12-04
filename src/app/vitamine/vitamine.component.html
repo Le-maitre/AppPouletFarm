@@ -15,35 +15,25 @@
 
 
 <ion-content>
-<div class="listuser animate__animated animate__fadeInUp ">
-  <ion-card>
-    <ion-card-content>
-      <ion-list >
-        <!-- <ion-item *ngFor="let element of data[0], let i = index" > -->
-          <ion-item *ngFor="let vitamine of vitamines ,let i = index">
+  <div class="listuser animate__animated animate__fadeInUp">
+    <ion-card *ngFor="let vitamine of vitamines; let i = index">
+      <ion-card-content>
+        <ion-item>
           <div style="width: 20px; height: 20px; border-radius: 50%; background-color: #D9D9D9; display: grid; justify-content: center; align-items: center; margin-right: 10px;">
-            <p>{{i+1}}</p>
+            <p>{{ i + 1 }}</p>
           </div>
-          <ion-label style="cursor: pointer;" [routerLink]="['detailvitamine']">{{ vitamine.nomVitamine }}</ion-label>
+          <ion-label style="cursor: pointer;" [routerLink]="['detailvitamine']">
+            <strong>{{ vitamine.nomVitamine }}</strong>
+            <br>
+            <span style="font-size: 0.8em;">Quantité: {{ vitamine.quantite }}  mg</span>
+          </ion-label>
           <div class="iconitem">
-          <!-- <ion-label>{{element.frequence}} HZ </ion-label> -->
-          <ion-icon name="create-outline" style="color: #005B2F; cursor: pointer; " [routerLink]="['../modifiervitamine']"></ion-icon>
-          <!-- <ion-icon name="trash" style="color: red;"   id="present-alert" (click)="presentAlert(element.id)" ></ion-icon> -->
-          <ion-icon name="trash" style="color: red;cursor: pointer;" (click)="confirmDeleteVitamine(vitamine.id)"></ion-icon>
+            <ion-icon name="create-outline" style="color: #005B2F; cursor: pointer; " [routerLink]="['../modifiervitamine']"></ion-icon>
+            <ion-icon name="trash" style="color: red; cursor: pointer;" (click)="confirmDeleteVitamine(vitamine.id)"></ion-icon>
           </div>
-            <!-- <ion-alert
-            header="Alert!"
-            [buttons]="alertButtons"
-            (ionAlertDidDismiss)="setResult($event)"
-            id="myAlert"
-            ></ion-alert> -->
         </ion-item>
-
-
-
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-</div>
-
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
+
