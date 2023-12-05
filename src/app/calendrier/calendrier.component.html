@@ -1,11 +1,8 @@
 <div class='container'>
   <div class="calendrier" style='display: flex; justify-content: center; align-items: center;'>
-    <full-calendar *ngIf='calendarVisible' [options]='calendarOptions' [events]='events'>
-      <ng-template #eventContent let-arg>
-        <b>{{ arg.timeText }}</b>
-        <i>{{ arg.event.nom }}</i> <!-- Afficher le nom de l'événement -->
-      </ng-template>
-    </full-calendar>
+    <div class="calendrier" style='display: flex; justify-content: center; align-items: center;'>
+      <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'></full-calendar>
+    </div>
   </div>
 
   <div class='demo-app-sidebar-section'>

@@ -2,7 +2,7 @@
   <div class="centre">
     <h1>Ajouter un événement</h1>
 
-    <form>
+    <form #eventForm="ngForm">
       <mat-form-field>
         <input matInput placeholder="Nom de l'événement" [(ngModel)]="nom">
       </mat-form-field>

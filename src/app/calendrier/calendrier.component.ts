@@ -8,6 +8,8 @@ import listPlugin from '@fullcalendar/list';
 import { EventService } from '../event.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AjouterEvenementComponent } from '../ajouter-evenement/ajouter-evenement.component';
+import { UserentriesService } from '../userentries.service';
+import { UserService } from '../user.service';
 
 function createEventId() {
   return String(Date.now());
@@ -50,24 +52,31 @@ export class CalendrierComponent implements OnInit {
   
   currentEvents: EventApi[] = [];
 
-  constructor(private changeDetector: ChangeDetectorRef, private eventService: EventService, public dialog: MatDialog) {
+  constructor(private changeDetector: ChangeDetectorRef, private eventService: EventService, public dialog: MatDialog, private userentriesService: UserentriesService) {
   }
 
   ngOnInit(): void {
-    const userId = localStorage.getItem('userId'); 
-    console.log("userid====",userId)
+    const userId = localStorage.getItem('userId');
     if (userId !== null) {
-      this.entryId = parseInt(userId);
-      if (!isNaN(this.entryId)) { 
-        this.getAllEvents(this.entryId); // Obtenir les événements pour cet utilisateur
+      const userIdNumber = parseInt(userId);
+      if (!isNaN(userIdNumber)) {
+        this.getAllUserEntries(userIdNumber); // Récupération des entrées de l'utilisateur
       }
     }
   }
 
-  getAllEvents(userId: number): void {
-    this.eventService.getAllEventsForUser(userId).subscribe((data: any[]) => {
-      console.log(data);
-      this.events = data;
+   // Récupération de toutes les entrées de l'utilisateur
+   getAllUserEntries(userId: number): void {
+    this.userentriesService.getUserEntries(userId).subscribe((entries: any[]) => {
+      // Mapper les entrées récupérées dans le format requis pour le calendrier
+      this.events = entries.map((entry: any) => ({
+        title: entry.nom, // Titre de l'événement (peut être personnalisé)
+        start: entry.dateEntree, // Date de début (date d'entrée)
+        end: entry.dateSortie // Date de fin (date de sortie)
+      }));
+
+      // Mise à jour des événements pour les afficher dans le calendrier
+      this.calendarOptions.events = this.events;
     });
   }
   ajouterEvenement(): void {
