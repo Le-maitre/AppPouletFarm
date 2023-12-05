@@ -41,7 +41,7 @@ export class AjoutmortComponent  implements OnInit {
           console.log('Perte de poulet ajoutée avec succès :', response);
           this.successMessage = 'Perte de poulet ajoutée avec succès !';
           setTimeout(() => {
-            this.router.navigate(['./votre-chemin']); // Remplacez './votre-chemin' par le chemin approprié
+            this.router.navigate(['./mort']); // Remplacez './votre-chemin' par le chemin approprié
           }, 2000); // Rediriger après 2 secondes (vous pouvez ajuster cette valeur)
         },
         (error) => {

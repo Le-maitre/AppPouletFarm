@@ -30,7 +30,7 @@ export class AjoutbilanComponent  implements OnInit {
           this.successMessage = 'Bilan ajouté avec succès !'; // Définir le message de succès
 
           setTimeout(() => {
-            this.router.navigate(['./bilan']);
+            this.router.navigate(['../bilan']);
           }, 2000);
         },
         (error) => {
@@ -46,7 +46,7 @@ export class AjoutbilanComponent  implements OnInit {
   
   isFormValid(): boolean {
     return (
-      this.formData.nom // Ajoutez ici les autres champs de votre formulaire
+      this.formData.nom  && this.formData.prix  && this.formData.description
     );
   }
 }

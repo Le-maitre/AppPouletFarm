@@ -16,10 +16,17 @@
         <ion-label class="label">Nom</ion-label>
         <input class="input" type="text" placeholder="" name="nom" [(ngModel)]="formData.nom" required/>
       </div>
-      <!-- Ajoutez d'autres champs pour votre formulaire ici -->
+      <div class="input-item">
+        <ion-label class="label">Prix</ion-label>
+        <input class="input" type="text" placeholder="" name="prix" [(ngModel)]="formData.prix" required/>
+      </div>
+      <div class="input-item">
+        <ion-label class="label">Description</ion-label>
+        <input class="input" type="text" placeholder="" name="desciption" [(ngModel)]="formData.description" required/>
+      </div>
 
       <div class="frame">
-        <button class="custom-btn btn-5" type="submit" style="margin-top: 130px;">
+        <button class="custom-btn btn-5" type="submit" style="margin-top: 0px;">
           <span>Ajouter</span>
         </button>
       </div>
