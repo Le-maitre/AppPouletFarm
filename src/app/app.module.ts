@@ -18,13 +18,12 @@ import { FullCalendarModule } from '@fullcalendar/angular';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-// ... autres imports de modules Angular Material nécessaires
-import { CdkTableModule } from '@angular/cdk/table';
+
 @NgModule({
   declarations: [AppComponent,EntreeComponent],
   imports: [FullCalendarModule,BrowserAnimationsModule, MatInputModule,
     MatButtonModule,
-    CdkTableModule,MatFormFieldModule,HttpClientModule,HttpClientJsonpModule,FormsModule,ReactiveFormsModule ,CalendarModule.forRoot({
+    MatFormFieldModule,HttpClientModule,HttpClientJsonpModule,FormsModule,ReactiveFormsModule ,CalendarModule.forRoot({
     provide: DateAdapter,
     useFactory: adapterFactory,
   }), NgCalendarModule,BrowserModule, IonicModule.forRoot(),AppRoutingModule],

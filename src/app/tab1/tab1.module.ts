@@ -54,8 +54,9 @@ import { AjouterEvenementComponent } from '../ajouter-evenement/ajouter-evenemen
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-// ... autres imports de modules Angular Material nécessaires
-import { CdkTableModule } from '@angular/cdk/table';
+import { DepenseComponent } from '../depense/depense.component';
+import { RecetteComponent } from '../recette/recette.component';
+
 
 @NgModule({
   imports: [
@@ -65,7 +66,6 @@ import { CdkTableModule } from '@angular/cdk/table';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    CdkTableModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory,
@@ -74,7 +74,7 @@ import { CdkTableModule } from '@angular/cdk/table';
     FullCalendarModule,
     Tab1PageRoutingModule
   ],
-  declarations: [Tab1Page,HomeComponent,PoussinComponent,DetailComponent,BilanComponent,DetailbilanComponent,
+  declarations: [Tab1Page,DepenseComponent,RecetteComponent,HomeComponent,PoussinComponent,DetailComponent,BilanComponent,DetailbilanComponent,
   DetailtacheComponent,ModifierentreeComponent,AjoutentreeComponent,ModifiertachebilanComponent,VaccinComponent,DetailvaccinComponent,AjoutvaccinComponent,ModifiervaccinComponent,AlimentComponent,StockComponent,VitamineComponent,MortComponent,
 AjoutbilanComponent,AjouttachebilanComponent,ModifiertachebilantacheComponent,DetailalimentComponent,AjoutalimenttComponent,ModifieralimenttComponent,AjoutvitamineComponent,DetailvitamineComponent,ModifiervitamineComponent,
 DetailmortComponent,AjoutmortComponent,ModifiermortComponent,AlerteComponent,DetailalerteComponent,GuideComponent,DemarrageComponent, ForumComponent, RapportComponent, CalendrierComponent, CroissanceComponent, FinitionComponent, SanteComponent, AjoutforumComponent,AjouterEvenementComponent

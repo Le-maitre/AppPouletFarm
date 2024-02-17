@@ -42,6 +42,8 @@ import { CroissanceComponent } from '../croissance/croissance.component';
 import { FinitionComponent } from '../finition/finition.component';
 import { SanteComponent } from '../sante/sante.component';
 import { AjoutforumComponent } from '../ajoutforum/ajoutforum.component';
+import { DepenseComponent } from '../depense/depense.component';
+import { RecetteComponent } from '../recette/recette.component';
 
 
 const routes: Routes = [
@@ -54,13 +56,20 @@ const routes: Routes = [
     component: EntreeComponent,
   },
   {
+    path: 'depense',
+    component: DepenseComponent,
+  },
+  {
+    path: 'recette',
+    component: RecetteComponent,
+  },
+  {
     path: 'home',
     component: HomeComponent,
   },
   { path: 'ajoutforum', 
   component: AjoutforumComponent
  }, 
-
 
   {
     path: 'sante',
