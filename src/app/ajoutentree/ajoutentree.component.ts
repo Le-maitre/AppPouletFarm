@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserentriesService } from '../userentries.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { parse } from 'date-fns';
 
 @Component({
@@ -8,43 +9,42 @@ import { parse } from 'date-fns';
   templateUrl: './ajoutentree.component.html',
   styleUrls: ['./ajoutentree.component.scss'],
 })
-export class AjoutentreeComponent  implements OnInit {
+export class AjoutentreeComponent implements OnInit {
   formData: any = {};
-  userEntries: any[] = []; 
+  userEntries: any[] = [];
   successMessage: string = ''; // Variable to hold the success message
+  unfilledFields: string[] = []; // Array to hold unfilled fields
 
   constructor(
     private userentriesService: UserentriesService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alertController: AlertController // Inject AlertController
   ) {}
 
-  addEntry() {
+  async addEntry() {
     const userId = localStorage.getItem("userId"); // Replace with the actual user ID
 
-    if (!this.isFormValid()) {
-      console.error('Form is not valid. Please fill in all mandatory fields.');
+    // Check for unfilled fields
+    this.unfilledFields = this.getUnfilledFields();
+
+    if (this.unfilledFields.length > 0) {
+      // If there are unfilled fields, display alert
+      const unfilledFieldsMessage = `Veuillez remplir les champs suivants: ${this.unfilledFields.join(', ')}`;
+      await this.presentAlert('Erreur', unfilledFieldsMessage);
       return;
     }
-  
+
     this.userentriesService.addEntry(parseInt(userId!), this.formData).subscribe(
       (response) => {
         console.log('Entry added successfully:', response);
-        this.successMessage = 'Entrée ajoutée avec succès !'; // Set success message
+        this.successMessage = 'Entry added successfully!'; // Set success message
         this.fetchUserEntries(parseInt(userId!));
         this.router.navigate(['./tabs/tab1/entree']);
         setTimeout(() => {
-         // Ensure this navigation works
+          // Ensure this navigation works
         }, 2000); // Redirect after 2 seconds (adjust as needed)
       },
-
-    //   setTimeout(() => {
-    //     // Rafraîchir la page après l'ajout réussi en naviguant vers la même page
-    //     this.router.navigateByUrl('/tabs/tab1/entree', { skipLocationChange: true }).then(() => {
-    //       this.router.navigate([this.route.snapshot.url.join('/')]);
-    //     });
-    //   }, 2000); // Rediriger après 2 secondes (ajustez si nécessaire)
-    // },
       (error) => {
         console.error('Error adding entry:', error);
         // Handle error: Show an error message to the user or perform appropriate actions.
@@ -52,8 +52,8 @@ export class AjoutentreeComponent  implements OnInit {
     );
   }
 
-async  fetchUserEntries(userId: number) {
-  await  this.userentriesService.getUserEntries(userId).subscribe(
+  async fetchUserEntries(userId: number) {
+    await this.userentriesService.getUserEntries(userId).subscribe(
       (entries) => {
         this.userEntries = entries; // Update userEntries with the fetched entries
       },
@@ -61,19 +61,34 @@ async  fetchUserEntries(userId: number) {
         console.error('Error fetching entries:', error);
         // Handle error, show error message, etc.
       }
-      );
-    }
-  
-  isFormValid(): boolean {
-    return (
-      this.formData.nom &&
-      this.formData.nombrePoussins &&
-      this.formData.dateEntree &&
-      this.formData.dateSortie
     );
   }
-  
+
+  getUnfilledFields(): string[] {
+    const unfilledFields: string[] = [];
+    if (!this.formData.nom) {
+      unfilledFields.push('Nom');
+    }
+    if (!this.formData.nombrePoussins) {
+      unfilledFields.push('Nombre de Poussins');
+    }
+    if (!this.formData.dateEntree) {
+      unfilledFields.push('Date d\'Entrée');
+    }
+    if (!this.formData.dateSortie) {
+      unfilledFields.push('Date de Sortie');
+    }
+    return unfilledFields;
+  }
+
+  async presentAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
 
   ngOnInit() {}
-
 }

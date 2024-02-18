@@ -42,7 +42,6 @@ import { CroissanceComponent } from '../croissance/croissance.component';
 import { FinitionComponent } from '../finition/finition.component';
 import { SanteComponent } from '../sante/sante.component';
 import { AjoutforumComponent } from '../ajoutforum/ajoutforum.component';
-import { DepenseComponent } from '../depense/depense.component';
 import { RecetteComponent } from '../recette/recette.component';
 
 
@@ -55,12 +54,9 @@ const routes: Routes = [
     path: 'entree',
     component: EntreeComponent,
   },
+
   {
-    path: 'depense',
-    component: DepenseComponent,
-  },
-  {
-    path: 'recette',
+    path: 'poussin/:id/recette',
     component: RecetteComponent,
   },
   {

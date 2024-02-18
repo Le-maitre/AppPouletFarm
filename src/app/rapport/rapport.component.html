@@ -23,9 +23,10 @@
       <ion-input class="input" type="number" [(ngModel)]="prixDuKilo"></ion-input>
     </ion-item>
     
-    <ion-item>
-      <ion-button expand="block" (click)="genererRapport()" style="font-weight: bold; font-size: 20px; text-align: center;justify-content: center;">Soumettre</ion-button>
-    </ion-item>
+      <!-- Styled submit button -->
+      <ion-item style="width: 100%; padding-left: 90px;">
+        <ion-button expand="block" (click)="genererRapport()" color="success"  class="custom-btn btn-5" style="font-weight: bold; font-size: 25px; text-align: center;">Soumettre</ion-button>
+      </ion-item>
   </ion-list>
   
   <ion-item *ngIf="rapportGenere" style="width: 100%; padding-left: 10px;">

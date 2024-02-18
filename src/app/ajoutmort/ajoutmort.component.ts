@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PouletMortService } from '../pouletmort.service';
 import { Router } from '@angular/router';
-import { Vaccination } from '../vaccination';
+import { AlertController } from '@ionic/angular'; // Import AlertController
 import { PouletMort } from '../pouletmort';
 
 @Component({
@@ -9,12 +9,16 @@ import { PouletMort } from '../pouletmort';
   templateUrl: './ajoutmort.component.html',
   styleUrls: ['./ajoutmort.component.scss'],
 })
-export class AjoutmortComponent  implements OnInit {
-  formData: any = {}; // Les données du formulaire pour l'ajout de perte de poulet
+export class AjoutmortComponent implements OnInit {
+  formData: any = {};
   entryId: any;
-  successMessage: string = ''; // Message de succès à afficher
+  successMessage: string = '';
 
-  constructor(private pouletMortService: PouletMortService, private router: Router) {}
+  constructor(
+    private pouletMortService: PouletMortService,
+    private router: Router,
+    private alertController: AlertController // Inject AlertController
+  ) {}
 
   ngOnInit(): void {
     const entryIdFromStorage = localStorage.getItem('entry');
@@ -23,15 +27,21 @@ export class AjoutmortComponent  implements OnInit {
     }
   }
 
-  ajouterPerte(): void {
+  async ajouterPerte(): Promise<void> {
     if (!this.isFormValid()) {
-      console.error('Le formulaire n\'est pas valide. Veuillez remplir tous les champs obligatoires.');
+      // Display an alert if the form is not valid
+      const alert = await this.alertController.create({
+        header: 'Invalid Form',
+        message: 'Veuillez remplir tous les champs.',
+        buttons: ['OK']
+      });
+      await alert.present();
       return;
     }
 
     if (this.entryId !== null) {
       const pouletMortData: PouletMort = {
-        id: 0, 
+        id: 0,
         causeDeces: this.formData.causeDeces,
         datePerte: this.formData.datePerte,
         nombre: this.formData.nombre,
@@ -41,27 +51,33 @@ export class AjoutmortComponent  implements OnInit {
           console.log('Perte de poulet ajoutée avec succès :', response);
           this.successMessage = 'Perte de poulet ajoutée avec succès !';
           setTimeout(() => {
-            this.router.navigate(['./mort']); // Remplacez './votre-chemin' par le chemin approprié
-          }, 2000); // Rediriger après 2 secondes (vous pouvez ajuster cette valeur)
+            this.router.navigate(['./mort']); // Replace './your-path' with the appropriate path
+          }, 2000); // Redirect after 2 seconds (you can adjust this value)
         },
         (error) => {
           console.error('Erreur lors de l\'ajout de la perte de poulet :', error);
-          // Gérer l'erreur : Afficher un message d'erreur à l'utilisateur ou effectuer les actions appropriées.
+          // Handle error: Show an error message to the user or perform appropriate actions.
         }
       );
     } else {
-      console.error('ID d\'entrée invalide.');
-      // Gérer cette situation d'une manière appropriée pour votre application
+      // Display an alert for an invalid entry ID
+      const alert = await this.alertController.create({
+        header: 'Invalid Entry ID',
+        message: 'Invalid entry ID.',
+        buttons: ['OK']
+      });
+      await alert.present();
+      // Handle this situation appropriately for your application
     }
   }
 
   isFormValid(): boolean {
-    // Validez ici les données du formulaire avant de les envoyer pour l'ajout
+    // Validate the form data here before sending for addition
     return (
       this.formData.causeDeces &&
       this.formData.datePerte &&
       this.formData.nombre
-      // Ajoutez d'autres validations si nécessaire
+      // Add other validations if necessary
     );
   }
 }

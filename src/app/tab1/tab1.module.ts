@@ -54,7 +54,6 @@ import { AjouterEvenementComponent } from '../ajouter-evenement/ajouter-evenemen
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { DepenseComponent } from '../depense/depense.component';
 import { RecetteComponent } from '../recette/recette.component';
 
 
@@ -74,7 +73,7 @@ import { RecetteComponent } from '../recette/recette.component';
     FullCalendarModule,
     Tab1PageRoutingModule
   ],
-  declarations: [Tab1Page,DepenseComponent,RecetteComponent,HomeComponent,PoussinComponent,DetailComponent,BilanComponent,DetailbilanComponent,
+  declarations: [Tab1Page,RecetteComponent,HomeComponent,PoussinComponent,DetailComponent,BilanComponent,DetailbilanComponent,
   DetailtacheComponent,ModifierentreeComponent,AjoutentreeComponent,ModifiertachebilanComponent,VaccinComponent,DetailvaccinComponent,AjoutvaccinComponent,ModifiervaccinComponent,AlimentComponent,StockComponent,VitamineComponent,MortComponent,
 AjoutbilanComponent,AjouttachebilanComponent,ModifiertachebilantacheComponent,DetailalimentComponent,AjoutalimenttComponent,ModifieralimenttComponent,AjoutvitamineComponent,DetailvitamineComponent,ModifiervitamineComponent,
 DetailmortComponent,AjoutmortComponent,ModifiermortComponent,AlerteComponent,DetailalerteComponent,GuideComponent,DemarrageComponent, ForumComponent, RapportComponent, CalendrierComponent, CroissanceComponent, FinitionComponent, SanteComponent, AjoutforumComponent,AjouterEvenementComponent

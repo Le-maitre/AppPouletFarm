@@ -1,23 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { BilanService } from '../bilan.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular'; // Import AlertController
 
 @Component({
   selector: 'app-ajoutbilan',
   templateUrl: './ajoutbilan.component.html',
   styleUrls: ['./ajoutbilan.component.scss'],
 })
-export class AjoutbilanComponent  implements OnInit {
+export class AjoutbilanComponent implements OnInit {
   formData: any = {};
   successMessage: string = '';
 
-  constructor(private bilanService: BilanService, private router: Router) {}
-  ngOnInit(): void {
-  }
+  constructor(
+    private bilanService: BilanService,
+    private router: Router,
+    private alertController: AlertController // Inject AlertController
+  ) {}
 
-  ajouterBilan(): void {
+  ngOnInit(): void {}
+
+  async ajouterBilan(): Promise<void> {
     if (!this.isFormValid()) {
-      console.error('Le formulaire n\'est pas valide. Veuillez remplir tous les champs obligatoires.');
+      // Display an alert if the form is not valid
+      const alert = await this.alertController.create({
+        header: 'Invalid Form',
+        message: 'Veuillez remplir tous les champs.',
+        buttons: ['OK']
+      });
+      await alert.present();
       return;
     }
 
@@ -27,7 +38,7 @@ export class AjoutbilanComponent  implements OnInit {
       this.bilanService.ajouterBilan(entryIdAsNumber, this.formData).subscribe(
         (response) => {
           console.log('Bilan ajouté avec succès :', response);
-          this.successMessage = 'Bilan ajouté avec succès !'; // Définir le message de succès
+          this.successMessage = 'Bilan ajouté avec succès !'; // Set success message
 
           setTimeout(() => {
             this.router.navigate(['../bilan']);
@@ -35,18 +46,24 @@ export class AjoutbilanComponent  implements OnInit {
         },
         (error) => {
           console.error('Erreur lors de l\'ajout du bilan :', error);
-          // Gérer l'erreur : Afficher un message d'erreur à l'utilisateur ou effectuer les actions appropriées.
+          // Handle error: Show an error message to the user or perform appropriate actions.
         }
       );
     } else {
-      console.error('Valeur d\'entrée invalide dans le stockage local.');
-      // Gérer cette situation d'une manière appropriée pour votre application
+      // Display an alert for an invalid entry in local storage
+      const alert = await this.alertController.create({
+        header: 'Invalid Entry',
+        message: 'Invalid entry value in local storage.',
+        buttons: ['OK']
+      });
+      await alert.present();
+      // Handle this situation appropriately for your application
     }
   }
-  
+
   isFormValid(): boolean {
     return (
-      this.formData.nom  && this.formData.prix  && this.formData.description
+      this.formData.nom && this.formData.prix && this.formData.description
     );
   }
 }
