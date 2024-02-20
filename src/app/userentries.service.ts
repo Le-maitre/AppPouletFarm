@@ -1,15 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Entry } from './entry';
+import { Observable, Subject, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserentriesService {
+
+  private updateEvent = new Subject<void>();
+
+  update$ = this.updateEvent.asObservable();
+
   private apiUrl = 'http://localhost:8080'; // Replace this with your API URL
 
   constructor(private http: HttpClient) {}
+
+  triggerUpdate() {
+    this.updateEvent.next();
+  }
 
   getUserEntries(userId: number): Observable<any[]> {
     // Assuming your API endpoint for fetching user entries is '/api/users/{userId}/entries'

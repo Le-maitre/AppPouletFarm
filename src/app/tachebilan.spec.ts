@@ -1,4 +1,4 @@
-import { Tachebilan } from './tachebilan';
+import { TacheBilan } from './tachebilan';
 
 describe('Tachebilan', () => {
   it('should create an instance', () => {

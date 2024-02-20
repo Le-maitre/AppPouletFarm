@@ -40,6 +40,7 @@ export class AjoutentreeComponent implements OnInit {
         console.log('Entry added successfully:', response);
         this.successMessage = 'Entry added successfully!'; // Set success message
         this.fetchUserEntries(parseInt(userId!));
+        this.userentriesService.triggerUpdate(); // Trigger update after adding entry
         this.router.navigate(['./tabs/tab1/entree']);
         setTimeout(() => {
           // Ensure this navigation works
