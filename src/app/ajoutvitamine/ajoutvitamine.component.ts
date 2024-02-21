@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { VitamineService } from '../vitamine.service';
+import { RecetteService } from '../recette.service';
 import { Router } from '@angular/router';
 import { Vaccination } from '../vaccination';
-import { Vitamine } from '../vitamine';
+import { Recette } from '../recette';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -12,10 +12,14 @@ import { AlertController } from '@ionic/angular';
 })
 export class AjoutvitamineComponent  implements OnInit {
   formData: any = {};
-  successMessage: string = '';
   entryId: any;
+  successMessage: string = '';
 
-  constructor(private vitamineService: VitamineService, private router: Router,  private alertController: AlertController) {}
+  constructor(
+    private recetteService: RecetteService,
+    private router: Router,
+    private alertController: AlertController
+  ) {}
 
   ngOnInit(): void {
     const entryIdFromStorage = localStorage.getItem('entry');
@@ -24,49 +28,51 @@ export class AjoutvitamineComponent  implements OnInit {
     }
   }
 
-  ajoutervitamine(): void {
+  async ajouterRecette(): Promise<void> {
     if (!this.isFormValid()) {
-      console.error('Le formulaire n\'est pas valide. Veuillez remplir tous les champs obligatoires.');
+      const alert = await this.alertController.create({
+        header: 'Invalid Form',
+        message: 'Please fill in all fields.',
+        buttons: ['OK']
+      });
+      await alert.present();
       return;
     }
-  
+
     if (this.entryId !== null) {
-      const vitamineData: Vitamine = {
-        nomVitamine: this.formData.nomVitamine,
-        quantite: this.formData.quantite,
-        id: 0
+      const recetteData: Recette = {
+        id: 0,
+        prix: this.formData.prix,
+        dateVente: this.formData.dateVente,
+        nombrePoulet: this.formData.nombrePoulet,
       };
-  
-      this.vitamineService.saveVitamineForEntry(this.entryId, vitamineData).subscribe(
+      this.recetteService.addRecetteForEntree(this.entryId, recetteData).subscribe(
         (response) => {
-          console.log('Vitamine ajoutée avec succès :', response);
-          this.successMessage = 'Vitamine ajoutée avec succès !';
-          this.presentAlert('Success', 'Vitamine ajouté avec succès !'); // Display success alert
+          console.log('Poulet loss added successfully:', response);
+          this.successMessage = 'Poulet loss added successfully!';
+          this.presentAlert('Success', 'Recette ajoutée avec succès !'); // Display success alert
           this.resetForm(); // Reset form fields
-          this.vitamineService.triggerUpdate();
+          this.recetteService.triggerUpdate(); // Trigger update after adding loss
         },
         (error) => {
-          console.error('Erreur lors de l\'ajout de la vitamine :', error);
-          // Gérer l'erreur : Afficher un message d'erreur à l'utilisateur ou effectuer les actions appropriées.
+          console.error('Error adding poulet loss:', error);
         }
       );
     } else {
-      console.error('ID d\'entrée invalide.');
-      // Gérer cette situation d'une manière appropriée pour votre application
+      const alert = await this.alertController.create({
+        header: 'Invalid Entry ID',
+        message: 'Invalid entry ID.',
+        buttons: ['OK']
+      });
+      await alert.present();
     }
   }
-  
 
   isFormValid(): boolean {
-    console.log('Valeur de nomVitamine:', this.formData.nomVitamine);
-    console.log('Valeur de quantite:', this.formData.quantite);
-  
-    // Autres validations
-    // ...
-  
     return (
-      this.formData.nomVitamine && this.formData.quantite
-      // Ajoutez ici d'autres vérifications si nécessaire pour valider le formulaire
+      this.formData.prix &&
+      this.formData.dateVente &&
+      this.formData.nombrePoulet
     );
   }
   async presentAlert(header: string, message: string): Promise<void> {
@@ -81,5 +87,4 @@ export class AjoutvitamineComponent  implements OnInit {
   resetForm(): void {
     this.formData = {}; // Reset form fields
   }
-  
 }
