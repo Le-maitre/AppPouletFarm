@@ -21,6 +21,9 @@ export class AlimentComponent implements OnInit {
       if (!isNaN(this.entryId)) {
         this.getAlimentsForEntry(this.entryId);
       }
+      this.alimentService.update$.subscribe(() => {
+        this.getAlimentsForEntry(this.entryId);
+      });
     }
   }
 

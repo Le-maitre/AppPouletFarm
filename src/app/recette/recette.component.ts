@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RecetteService } from '../recette.service';
 import { AlertController } from '@ionic/angular';
+import { Recette } from '../recette'; // Import the Recette interface
 
 @Component({
   selector: 'app-recette',
   templateUrl: './recette.component.html',
   styleUrls: ['./recette.component.scss'],
 })
-export class RecetteComponent  implements OnInit {
-  recettes: any[] = [];
+export class RecetteComponent implements OnInit {
+  recettes: any[] = []; // Declare the recettes array with Recette interface
   entryId: any;
 
   constructor(
@@ -20,49 +21,46 @@ export class RecetteComponent  implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.entryId = localStorage.getItem('entry');
-    if (this.entryId !== null) {
-      this.entryId = parseInt(this.entryId);
-      if (!isNaN(this.entryId)) {
-        this.getAllRecette(this.entryId);
-      }
+    this.entryId = parseInt(localStorage.getItem('entry') || '', 10);
+    if (!isNaN(this.entryId)) {
+      this.getAllRecette(this.entryId);
     }
     this.recetteService.update$.subscribe(() => {
-      this.getAllRecette(this.entryId); // Fetch updated losses after update trigger
+      this.getAllRecette(this.entryId); // Fetch updated recettes after update trigger
     });
   }
 
   getAllRecette(entryId: number): void {
-    this.recetteService.getAllRecetteForEntree(this.entryId).subscribe(
-      (data: any[]) => {
+    this.recetteService.getAllRecetteForEntree(entryId).subscribe(
+      (data: Recette[]) => {
         this.recettes = data;
       },
       (error) => {
-        console.error('Error fetching losses: ', error);
+        console.error('Error fetching recettes: ', error);
       }
     );
   }
 
   deleteRecette(recetteId: number): void {
     this.recetteService.deleteRecetteForEntree(this.entryId, recetteId).subscribe(() => {
-      this.recetteService.triggerUpdate(); // Trigger update after deleting loss
+      this.recetteService.triggerUpdate(); // Trigger update after deleting recette
     });
   }
 
-  async confirmDeleteRecette(perteId: number): Promise<void> {
+  async confirmDeleteRecette(recetteId: number): Promise<void> {
     const confirmAlert = await this.alertController.create({
       header: 'Confirmation',
-      message: 'êtes vous sûr de vouloir supprimer cette perte?',
+      message: 'Are you sure you want to delete this sale?',
       buttons: [
         {
-          text: 'Annuler',
+          text: 'Cancel',
           role: 'cancel',
           handler: () => {}
         },
         {
-          text: 'Supprimer',
+          text: 'Delete',
           handler: () => {
-            this.deleteRecette(perteId);
+            this.deleteRecette(recetteId);
           },
         },
       ],

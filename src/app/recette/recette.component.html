@@ -1,5 +1,3 @@
-
-
 <div id="container" style="display: grid; " class="head animate__animated animate__fadeInDown ">
   <ion-icon name="arrow-undo" style="display: block; font-size: 25px; padding: 15px  15px 0  15px; color: #fff;" [routerLink]="['../']"></ion-icon>
   <div class="img" style="box-sizing: border-box;">
@@ -7,10 +5,9 @@
     <p style="margin-right: 0px; color: #fff;"> <strong>Recette </strong></p>
   </div>
 </div>
-<!-- <ion-label style=" margin-left: 20px ; margin-top: 10px"><strong></strong></ion-label> -->
- <div class="icon_nombre">
-  <ion-searchbar slot="end" ></ion-searchbar>
-<ion-button [routerLink]="['../ajoutvitamine']" ><ion-icon name="add-circle-outline" style="font-size: 30px;"></ion-icon></ion-button>
+<div class="icon_nombre">
+  <ion-searchbar slot="end"></ion-searchbar>
+  <ion-button [routerLink]="['../ajoutvitamine']"><ion-icon name="add-circle-outline" style="font-size: 30px;"></ion-icon></ion-button>
 </div>
 
 <ion-content>
@@ -19,24 +16,26 @@
       <ion-card-content>
         <ion-list>
           <ion-item>
-            <!-- Icône pour afficher le nombre -->
+            <!-- Display the number of chickens -->
             <div style="width: 20px; height: 20px; border-radius: 50%; background-color: #D9D9D9; display: grid; justify-content: center; align-items: center; margin-right: 10px;">
-              <p>{{ recette.nombrePoulet }}</p>
+              <p>{{ recette.nombre }}</p>
             </div>
        
-            <ion-label style="cursor: pointer;" [routerLink]="['../detailmort']">
-              Perte du {{ recette.dateVente | date }}
+            <!-- Display the sale date and price -->
+            <ion-label style="cursor: pointer;">
+              Vente du {{ recette.dateVente | date: 'dd/MM/yyyy'}}
               <br>
-              <small>{{ recette.prix }}</small>
+              <small>{{ recette.prix }} FCFA</small>
             </ion-label>
-                 <!-- Icône pour modifier -->
-                 <ion-icon name="create-outline" style="color: #005B2F; cursor: pointer;" [routerLink]="['../modifiermort']"></ion-icon>
-                 <!-- Icône pour supprimer -->
-                 <ion-icon name="trash" style="color: red; cursor: pointer;" (click)="confirmDeleteRecette(recette.id)"></ion-icon>
+            
+            <!-- Icon for editing -->
+            <ion-icon name="create-outline" style="color: #005B2F; cursor: pointer;" [routerLink]="['../modifiermort']"></ion-icon>
+            
+            <!-- Icon for deletion -->
+            <ion-icon name="trash" style="color: red; cursor: pointer;" (click)="confirmDeleteRecette(recette.id)"></ion-icon>
           </ion-item>
         </ion-list>
       </ion-card-content>
     </ion-card>
   </div>
 </ion-content>
-

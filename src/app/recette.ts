@@ -1,7 +1,7 @@
 export interface Recette {
     id?: number; // Optional as it will be assigned by the backend
-    nombrePoulet: number;
+    nombre: number;
     prix: number;
-    dateVente: string; // Assuming date is in string format
+    dateVente: Date; // Assuming date is in string format
   }
   

@@ -1,8 +1,8 @@
 <div id="container" style="display: grid; " class="head animate__animated animate__fadeInDown ">
-  <ion-icon name="arrow-undo" style="display: block; font-size: 25px; padding: 15px  15px 0  15px; color: #fff;" [routerLink]="['../bilan']"></ion-icon>
+  <ion-icon name="arrow-undo" style="display: block; font-size: 25px; padding: 15px  15px 0  15px; color: #fff;" [routerLink]="['../recette']"></ion-icon>
   <div class="img" style="box-sizing: border-box;">
     <img src="../../assets/bilan.png" alt="" width="100px" height="80px" >
-    <p style="margin-right: 0px; color: #fff;"> <strong>Bilan </strong></p>
+    <p style="margin-right: 0px; color: #fff;"> <strong>Recette </strong></p>
   </div>
 </div>
 
@@ -13,16 +13,16 @@
 
     <div  class="input-item">
       <ion-label class="label">Nombre</ion-label>
-      <input class="input" type="number" name="nombre" [(ngModel)]="formData.nombrePoulet" required/>
+      <input class="input" type="number" name="nombre" [(ngModel)]="formData.nombre" required/>
     </div >
     <div  class="input-item">
       <ion-label class="label">Prix</ion-label>
-      <input class="input" type="text" name="cause" [(ngModel)]="formData.prix" required/>
+      <input class="input" type="text" name="prix" [(ngModel)]="formData.prix" required/>
     </div >
 
     <div  class="input-item">
       <ion-label class="label">Date de Vente</ion-label>
-      <input class="input" type="Date" name="datePerte" [(ngModel)]="formData.dateVente" required/>
+      <input class="input" type="Date" name="dateVente" [(ngModel)]="formData.dateVente" required/>
     </div >
     <div class="frame">
       <button class="custom-btn btn-5"><span>Ajouter</span></button>

@@ -7,10 +7,13 @@ import { Router } from '@angular/router';
   templateUrl: './ajoutforum.component.html',
   styleUrls: ['./ajoutforum.component.scss'],
 })
-export class AjoutforumComponent  implements OnInit {
-  ngOnInit(): void {
-  }
-  constructor(private forumService: ForumService, private router: Router, ) {}
+export class AjoutforumComponent implements OnInit {
+  selectedImage: string | ArrayBuffer | null = null;
+  description: string = '';
+
+  constructor(private forumService: ForumService, private router: Router) {}
+
+  ngOnInit(): void {}
 
   publishPost() {
     const newPost = {
@@ -22,14 +25,8 @@ export class AjoutforumComponent  implements OnInit {
     };
 
     this.forumService.addPost(newPost);
-    this.forumService.triggerUpdate(); // Trigger update after adding entry
     this.router.navigate(['./tabs/tab1/forum']);
-    setTimeout(() => {
-      // Ensure this navigation works
-    }, 2000); // Redirect after 2 s
   }
-  selectedImage: string | ArrayBuffer | null = null;
-  description: string = '';
 
   onFileSelected(event: any) {
     const file: File = event.target.files[0];

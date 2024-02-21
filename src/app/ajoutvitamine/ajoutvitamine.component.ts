@@ -44,7 +44,7 @@ export class AjoutvitamineComponent  implements OnInit {
         id: 0,
         prix: this.formData.prix,
         dateVente: this.formData.dateVente,
-        nombrePoulet: this.formData.nombrePoulet,
+        nombre: this.formData.nombre,
       };
       this.recetteService.addRecetteForEntree(this.entryId, recetteData).subscribe(
         (response) => {
@@ -72,7 +72,7 @@ export class AjoutvitamineComponent  implements OnInit {
     return (
       this.formData.prix &&
       this.formData.dateVente &&
-      this.formData.nombrePoulet
+      this.formData.nombre
     );
   }
   async presentAlert(header: string, message: string): Promise<void> {
