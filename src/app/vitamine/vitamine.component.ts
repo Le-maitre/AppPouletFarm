@@ -27,6 +27,11 @@ export class VitamineComponent  implements OnInit {
         this.getAllVtamines(this.entryId);
       }
     }
+    this.vitamineService.update$.subscribe(() => {
+      if (this.entryId !== null) {
+        this.getAllVtamines(parseInt(this.entryId));
+      }
+    });
   }
 
   // Méthode pour récupérer les détails des vaccins liés à une entrée spécifique

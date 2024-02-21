@@ -23,6 +23,11 @@ export class BilanComponent  implements OnInit {
         if (!isNaN(this.entryId)) { // Vérifier si entryId est un nombre valide
           this.getBilansForEntry(this.entryId); // Appeler la méthode pour récupérer les bilans
         }
+
+        // Subscribe to update$ observable to fetch bilans whenever an update is triggered
+    this.bilanService.update$.subscribe(() => {
+      this.getBilansForEntry(this.entryId);
+    });
       }
     }
     

@@ -8,8 +8,8 @@ import { AlertController } from '@ionic/angular';
   templateUrl: './mort.component.html',
   styleUrls: ['./mort.component.scss'],
 })
-export class MortComponent  implements OnInit {
-  pertes: any[] = []; // Assurez-vous que la propriété est nommée 'pertes'
+export class MortComponent implements OnInit {
+  pertes: any[] = [];
   entryId: any;
 
   constructor(
@@ -24,51 +24,44 @@ export class MortComponent  implements OnInit {
     if (this.entryId !== null) {
       this.entryId = parseInt(this.entryId);
       if (!isNaN(this.entryId)) {
-        // Vérifier si entryId est un nombre valide
         this.getAllPertes(this.entryId);
       }
     }
+    this.pouletMortService.update$.subscribe(() => {
+      this.getAllPertes(this.entryId); // Fetch updated losses after update trigger
+    });
   }
 
-  // Méthode pour récupérer les détails des pertes liées à une entrée spécifique
   getAllPertes(entryId: number): void {
     this.pouletMortService.getAllPertesForEntree(this.entryId).subscribe(
       (data: any[]) => {
-        this.pertes = data; // Affecter les détails des pertes à la propriété 'pertes' pour affichage
+        this.pertes = data;
       },
       (error) => {
-        console.error('Erreur lors de la récupération des pertes : ', error);
+        console.error('Error fetching losses: ', error);
       }
     );
   }
 
-  // Méthode pour supprimer une perte par son ID
   deletePerte(perteId: number): void {
     this.pouletMortService.deletePerteForEntree(this.entryId, perteId).subscribe(() => {
-      // Rafraîchir la liste des pertes après la suppression
-      if (this.entryId !== null) {
-        this.getAllPertes(parseInt(this.entryId));
-      }
+      this.pouletMortService.triggerUpdate(); // Trigger update after deleting loss
     });
   }
 
-  // Méthode pour afficher la boîte de dialogue de confirmation
   async confirmDeletePerte(perteId: number): Promise<void> {
     const confirmAlert = await this.alertController.create({
       header: 'Confirmation',
-      message: 'Êtes-vous sûr de vouloir supprimer cette perte ?',
+      message: 'êtes vous sûr de vouloir supprimer cette perte?',
       buttons: [
         {
           text: 'Annuler',
           role: 'cancel',
-          handler: () => {
-            // L'utilisateur a annulé la suppression
-          },
+          handler: () => {}
         },
         {
           text: 'Supprimer',
           handler: () => {
-            // L'utilisateur a confirmé la suppression
             this.deletePerte(perteId);
           },
         },

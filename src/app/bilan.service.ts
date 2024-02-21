@@ -1,15 +1,24 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BilanService {
+
+  private updateEvent = new Subject<void>();
+
+  update$ = this.updateEvent.asObservable();
+
   private baseUrl = 'http://localhost:8080/api/bilanprevisions'; // Replace with your Spring Boot backend URL
   
   constructor(private http: HttpClient) { }
 
+  triggerUpdate() {
+    this.updateEvent.next();
+  }
+  
   getBilansForEntry(entryId: number): Observable<any[]> {
     console.log("entree==========",entryId);
     return this.http.get<any[]>(`${this.baseUrl}/entree/${entryId}`);

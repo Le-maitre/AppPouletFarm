@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PouletMortService } from '../pouletmort.service';
 import { Router } from '@angular/router';
-import { AlertController } from '@ionic/angular'; // Import AlertController
+import { AlertController } from '@ionic/angular';
 import { PouletMort } from '../pouletmort';
 
 @Component({
@@ -17,7 +17,7 @@ export class AjoutmortComponent implements OnInit {
   constructor(
     private pouletMortService: PouletMortService,
     private router: Router,
-    private alertController: AlertController // Inject AlertController
+    private alertController: AlertController
   ) {}
 
   ngOnInit(): void {
@@ -29,10 +29,9 @@ export class AjoutmortComponent implements OnInit {
 
   async ajouterPerte(): Promise<void> {
     if (!this.isFormValid()) {
-      // Display an alert if the form is not valid
       const alert = await this.alertController.create({
         header: 'Invalid Form',
-        message: 'Veuillez remplir tous les champs.',
+        message: 'Please fill in all fields.',
         buttons: ['OK']
       });
       await alert.present();
@@ -48,36 +47,43 @@ export class AjoutmortComponent implements OnInit {
       };
       this.pouletMortService.addPerteForEntree(this.entryId, pouletMortData).subscribe(
         (response) => {
-          console.log('Perte de poulet ajoutée avec succès :', response);
-          this.successMessage = 'Perte de poulet ajoutée avec succès !';
-          setTimeout(() => {
-            this.router.navigate(['./mort']); // Replace './your-path' with the appropriate path
-          }, 2000); // Redirect after 2 seconds (you can adjust this value)
+          console.log('Poulet loss added successfully:', response);
+          this.successMessage = 'Poulet loss added successfully!';
+          this.presentAlert('Success', 'Perte ajoutée avec succès !'); // Display success alert
+          this.resetForm(); // Reset form fields
+          this.pouletMortService.triggerUpdate(); // Trigger update after adding loss
         },
         (error) => {
-          console.error('Erreur lors de l\'ajout de la perte de poulet :', error);
-          // Handle error: Show an error message to the user or perform appropriate actions.
+          console.error('Error adding poulet loss:', error);
         }
       );
     } else {
-      // Display an alert for an invalid entry ID
       const alert = await this.alertController.create({
         header: 'Invalid Entry ID',
         message: 'Invalid entry ID.',
         buttons: ['OK']
       });
       await alert.present();
-      // Handle this situation appropriately for your application
     }
   }
 
   isFormValid(): boolean {
-    // Validate the form data here before sending for addition
     return (
       this.formData.causeDeces &&
       this.formData.datePerte &&
       this.formData.nombre
-      // Add other validations if necessary
     );
+  }
+  async presentAlert(header: string, message: string): Promise<void> {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  resetForm(): void {
+    this.formData = {}; // Reset form fields
   }
 }

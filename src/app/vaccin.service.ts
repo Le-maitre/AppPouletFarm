@@ -1,16 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import { Vaccination } from './vaccination';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VaccinService {
+  private updateEvent = new Subject<void>();
+
+  update$ = this.updateEvent.asObservable();
+
   private apiUrl = 'http://localhost:8080/api/vaccinations'; // Remplacez ceci par l'URL de votre API
 
   constructor(private http: HttpClient) { }
-
+ triggerUpdate() {
+    this.updateEvent.next();
+  }
   // Récupérer toutes les vaccinations pour une entrée spécifique
   getAllVaccinationsForEntry(entryId: number): Observable<Vaccination[]> {
     const url = `${this.apiUrl}/entry/${entryId}/vaccinations`; // Utilisation de l'entryId pour filtrer les vaccinations

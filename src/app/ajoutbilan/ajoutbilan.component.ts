@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BilanService } from '../bilan.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular'; // Import AlertController
 
 @Component({
@@ -10,11 +9,9 @@ import { AlertController } from '@ionic/angular'; // Import AlertController
 })
 export class AjoutbilanComponent implements OnInit {
   formData: any = {};
-  successMessage: string = '';
 
   constructor(
     private bilanService: BilanService,
-    private router: Router,
     private alertController: AlertController // Inject AlertController
   ) {}
 
@@ -38,11 +35,9 @@ export class AjoutbilanComponent implements OnInit {
       this.bilanService.ajouterBilan(entryIdAsNumber, this.formData).subscribe(
         (response) => {
           console.log('Bilan ajouté avec succès :', response);
-          this.successMessage = 'Bilan ajouté avec succès !'; // Set success message
-
-          setTimeout(() => {
-            this.router.navigate(['../bilan']);
-          }, 2000);
+          this.presentAlert('Success', 'Bilan ajouté avec succès !'); // Display success alert
+          this.resetForm(); // Reset form fields
+          this.bilanService.triggerUpdate(); // Trigger update after adding bilan
         },
         (error) => {
           console.error('Erreur lors de l\'ajout du bilan :', error);
@@ -65,5 +60,18 @@ export class AjoutbilanComponent implements OnInit {
     return (
       this.formData.nom && this.formData.prix && this.formData.description
     );
+  }
+
+  async presentAlert(header: string, message: string): Promise<void> {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  resetForm(): void {
+    this.formData = {}; // Reset form fields
   }
 }

@@ -3,6 +3,7 @@ import { VitamineService } from '../vitamine.service';
 import { Router } from '@angular/router';
 import { Vaccination } from '../vaccination';
 import { Vitamine } from '../vitamine';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-ajoutvitamine',
@@ -14,7 +15,7 @@ export class AjoutvitamineComponent  implements OnInit {
   successMessage: string = '';
   entryId: any;
 
-  constructor(private vitamineService: VitamineService, private router: Router) {}
+  constructor(private vitamineService: VitamineService, private router: Router,  private alertController: AlertController) {}
 
   ngOnInit(): void {
     const entryIdFromStorage = localStorage.getItem('entry');
@@ -40,9 +41,9 @@ export class AjoutvitamineComponent  implements OnInit {
         (response) => {
           console.log('Vitamine ajoutée avec succès :', response);
           this.successMessage = 'Vitamine ajoutée avec succès !';
-          setTimeout(() => {
-            this.router.navigate(['./vitamine']);
-          }, 2000);
+          this.presentAlert('Success', 'Vitamine ajouté avec succès !'); // Display success alert
+          this.resetForm(); // Reset form fields
+          this.vitamineService.triggerUpdate();
         },
         (error) => {
           console.error('Erreur lors de l\'ajout de la vitamine :', error);
@@ -68,6 +69,17 @@ export class AjoutvitamineComponent  implements OnInit {
       // Ajoutez ici d'autres vérifications si nécessaire pour valider le formulaire
     );
   }
-  
+  async presentAlert(header: string, message: string): Promise<void> {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  resetForm(): void {
+    this.formData = {}; // Reset form fields
+  }
   
 }

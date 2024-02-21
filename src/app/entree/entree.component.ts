@@ -10,6 +10,8 @@ import { UserService } from '../user.service';
 })
 export class EntreeComponent implements OnInit {
   userEntries: any[] = []; // Assuming your entries are of type 'any[]'
+  searchQuery: string = '';
+
 
   constructor(
     private userentriesService: UserentriesService,
@@ -81,4 +83,11 @@ export class EntreeComponent implements OnInit {
       }
     );
   }
+
+  searchEntries() {
+    const searchTerm = this.searchQuery.toLowerCase();
+    this.userEntries = this.userEntries.filter(entry => entry.nom.toLowerCase().includes(searchTerm));
+  }
+
+  
 }

@@ -30,6 +30,11 @@ export class VaccinComponent  implements OnInit {
         this.getAllVaccinations(this.entryId); // Appeler la méthode pour récupérer les vaccins
       }
     }
+    this.vaccinService.update$.subscribe(() => {
+      if (this.entryId !== null) {
+        this.getAllVaccinations(parseInt(this.entryId));
+      }
+    });
   }
 
   // Méthode pour récupérer les détails des vaccins liés à une entrée spécifique

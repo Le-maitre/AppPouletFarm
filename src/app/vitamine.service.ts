@@ -1,15 +1,23 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject, throwError } from 'rxjs';
 import { Vitamine } from './vitamine';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VitamineService {
+  private updateEvent = new Subject<void>();
+
+  update$ = this.updateEvent.asObservable();
+
   private apiUrl = 'http://localhost:8080/api/entree'; // Remplacez ceci par l'URL de votre API
 
   constructor(private http: HttpClient) { }
+  
+  triggerUpdate() {
+    this.updateEvent.next();
+  }
 
   // Récupérer toutes les vitamines pour une entrée spécifique
   getAllVitaminesForEntry(entryId: number): Observable<Vitamine[]> {

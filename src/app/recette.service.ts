@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
-import { PouletMort } from './pouletmort'; // Assurez-vous d'importer correctement le modèle PouletMort
+import { Recette } from './recette'; // Assurez-vous d'importer correctement le modèle PouletMort
 
 @Injectable({
   providedIn: 'root'
 })
-export class PouletMortService {
+export class RecetteService {
   
   private updateEvent = new Subject<void>();
 
   update$ = this.updateEvent.asObservable();
 
-  private apiUrl = 'http://localhost:8080/api/pouletmort'; // Remplacez ceci par l'URL de votre API
+  private apiUrl = 'http://localhost:8080/api/recette'; // Remplacez ceci par l'URL de votre API
 
   constructor(private http: HttpClient) { }
 
@@ -21,21 +21,21 @@ export class PouletMortService {
   }
 
   // Récupérer toutes les pertes de poulets pour une entrée spécifique
-  getAllPertesForEntree(entreeId: number): Observable<PouletMort[]> {
+  getAllRecetteForEntree(entreeId: number): Observable<Recette[]> {
     console.log("entryid====",entreeId)
     const url = `${this.apiUrl}/entree/${entreeId}`;
-    return this.http.get<PouletMort[]>(url);
+    return this.http.get<Recette[]>(url);
   }
 
   // Ajouter une nouvelle perte de poulet pour une entrée spécifique
-  addPerteForEntree(entreeId: number, pouletMort: PouletMort): Observable<PouletMort> {
+  addRecetteForEntree(entreeId: number, recette: Recette): Observable<Recette> {
     const url = `${this.apiUrl}/entree/${entreeId}/add`;
-    return this.http.post<PouletMort>(url, pouletMort);
+    return this.http.post<Recette>(url, recette);
   }
 
  // Supprimer une perte de poulet par son ID pour une entrée spécifique
- deletePerteForEntree(entreeId: number, perteId: number): Observable<void> {
-  const url = `${this.apiUrl}/entree/${entreeId}/delete/${perteId}`; // Correction du passage de l'ID de la perte
+ deleteRecetteForEntree(entreeId: number, recetteId: number): Observable<void> {
+  const url = `${this.apiUrl}/entree/${entreeId}/delete/${recetteId}`; // Correction du passage de l'ID de la perte
   return this.http.delete<void>(url);
 }
 }

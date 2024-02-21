@@ -26,6 +26,8 @@
        
             <ion-label style="cursor: pointer;" [routerLink]="['../detailmort']">
               Perte du {{ perte.datePerte | date }}
+              <br>
+              <small>{{ perte.causeDeces }}</small>
             </ion-label>
                  <!-- Icône pour modifier -->
                  <ion-icon name="create-outline" style="color: #005B2F; cursor: pointer;" [routerLink]="['../modifiermort']"></ion-icon>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VaccinService } from '../vaccin.service';
 import { Router } from '@angular/router';
 import { Vaccination } from '../vaccination';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-ajoutvaccin',
@@ -13,7 +14,7 @@ export class AjoutvaccinComponent  implements OnInit {
   successMessage: string = '';
   entryId: any;
 
-  constructor(private vaccinService: VaccinService, private router: Router) {}
+  constructor(private vaccinService: VaccinService, private router: Router, private alertController: AlertController) {}
 
   ngOnInit(): void {
     const entryIdFromStorage = localStorage.getItem('entry');
@@ -38,9 +39,10 @@ export class AjoutvaccinComponent  implements OnInit {
         (response) => {
           console.log('Vaccin ajouté avec succès :', response);
           this.successMessage = 'Vaccin ajouté avec succès !';
-          setTimeout(() => {
-            this.router.navigate(['./vaccin']);
-          }, 2000);
+          this.presentAlert('Success', 'Vaccin ajouté avec succès !'); // Display success alert
+          this.resetForm(); // Reset form fields
+          this.vaccinService.triggerUpdate();
+          
         },
         (error) => {
           console.error('Erreur lors de l\'ajout du bilan :', error);
@@ -58,5 +60,17 @@ export class AjoutvaccinComponent  implements OnInit {
       this.formData.typeVaccin && this.formData.dateVaccination
       // Ajoutez ici d'autres vérifications si nécessaire pour valider le formulaire
     );
+  }
+  async presentAlert(header: string, message: string): Promise<void> {
+    const alert = await this.alertController.create({
+      header: header,
+      message: message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  resetForm(): void {
+    this.formData = {}; // Reset form fields
   }
 }

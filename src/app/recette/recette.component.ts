@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BilanService } from '../bilan.service';
+import { RecetteService } from '../recette.service';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -9,67 +9,60 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['./recette.component.scss'],
 })
 export class RecetteComponent  implements OnInit {
-  bilans: any[] = []; // Ensure the property is named 'bilans'
+  recettes: any[] = [];
   entryId: any;
-  bilanEntries: any[] = [];
-  
-  constructor( private bilanService: BilanService,private router: Router,
-    private route: ActivatedRoute, private alertController: AlertController) { }
 
-    ngOnInit(): void {
-      this.entryId = localStorage.getItem("entry");
-      if (this.entryId !== null) {
-        this.entryId = parseInt(this.entryId);
-        if (!isNaN(this.entryId)) { // Vérifier si entryId est un nombre valide
-          this.getBilansForEntry(this.entryId); // Appeler la méthode pour récupérer les bilans
-        }
+  constructor(
+    private recetteService: RecetteService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private alertController: AlertController
+  ) {}
+
+  ngOnInit(): void {
+    this.entryId = localStorage.getItem('entry');
+    if (this.entryId !== null) {
+      this.entryId = parseInt(this.entryId);
+      if (!isNaN(this.entryId)) {
+        this.getAllRecette(this.entryId);
       }
     }
-    
-  
-    navigateToDetailBilan(bilanId: number): void {
-      this.router.navigate(['../detailbilan', bilanId]);
-    }
-    
-
-  getBilansForEntry(entryId:number): void {
-    
-    this.bilanService.getBilansForEntry(entryId!).subscribe((data: any[]) => {
-      console.log(data); 
-      this.bilans = data;
+    this.recetteService.update$.subscribe(() => {
+      this.getAllRecette(this.entryId); // Fetch updated losses after update trigger
     });
   }
 
-   // Méthode pour supprimer un bilan par son ID
-   deleteBilan(bilanId: number): void {
-    this.bilanService.deleteBilanById(bilanId).subscribe(() => {
-      // Rafraîchir la liste des bilans après la suppression
-      if (this.entryId !== null) {
-        this.getBilansForEntry(parseInt(this.entryId));
+  getAllRecette(entryId: number): void {
+    this.recetteService.getAllRecetteForEntree(this.entryId).subscribe(
+      (data: any[]) => {
+        this.recettes = data;
+      },
+      (error) => {
+        console.error('Error fetching losses: ', error);
       }
+    );
+  }
+
+  deleteRecette(recetteId: number): void {
+    this.recetteService.deleteRecetteForEntree(this.entryId, recetteId).subscribe(() => {
+      this.recetteService.triggerUpdate(); // Trigger update after deleting loss
     });
   }
-  
 
-
-  // Méthode pour afficher la boîte de dialogue de confirmation
-  async confirmDeleteBilan(bilanId: number): Promise<void> {
+  async confirmDeleteRecette(perteId: number): Promise<void> {
     const confirmAlert = await this.alertController.create({
       header: 'Confirmation',
-      message: 'Êtes-vous sûr de vouloir supprimer ce bilan ?',
+      message: 'êtes vous sûr de vouloir supprimer cette perte?',
       buttons: [
         {
           text: 'Annuler',
           role: 'cancel',
-          handler: () => {
-            // L'utilisateur a annulé la suppression
-          },
+          handler: () => {}
         },
         {
           text: 'Supprimer',
           handler: () => {
-            // L'utilisateur a confirmé la suppression
-            this.deleteBilan(bilanId);
+            this.deleteRecette(perteId);
           },
         },
       ],
@@ -77,6 +70,3 @@ export class RecetteComponent  implements OnInit {
     await confirmAlert.present();
   }
 }
-
-
-
